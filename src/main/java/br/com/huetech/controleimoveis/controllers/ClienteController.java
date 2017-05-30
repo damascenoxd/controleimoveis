@@ -12,11 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.huetech.controleimoveis.models.Telefone;
-import br.com.huetech.controleimoveis.models.Endereco;
 import br.com.huetech.controleimoveis.daos.ClienteDao;
 import br.com.huetech.controleimoveis.daos.EnderecoDao;
-import br.com.huetech.controleimoveis.daos.TelefoneDao;
 import br.com.huetech.controleimoveis.models.Cliente;
 
 @Controller
