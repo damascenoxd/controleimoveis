@@ -12,10 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.huetech.controleimoveis.daos.EstadoDao;
 import br.com.huetech.controleimoveis.daos.CidadeDao;
+import br.com.huetech.controleimoveis.daos.EstadoDao;
 import br.com.huetech.controleimoveis.models.Cidade;
-import br.com.huetech.controleimoveis.models.Estado;
 
 @Controller
 @RequestMapping("/cidade")

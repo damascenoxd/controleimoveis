@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import br.com.huetech.controleimoveis.daos.ClienteDao;
 import br.com.huetech.controleimoveis.daos.EnderecoDao;
+import br.com.huetech.controleimoveis.daos.TelefoneDao;
 import br.com.huetech.controleimoveis.models.Cliente;
 
 @Controller

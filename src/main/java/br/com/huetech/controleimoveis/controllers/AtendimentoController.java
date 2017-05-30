@@ -12,20 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.huetech.controleimoveis.daos.TipoPretensaoDao;
-import br.com.huetech.controleimoveis.models.TipoContato;
-import br.com.huetech.controleimoveis.models.Atendimento;
 import br.com.huetech.controleimoveis.daos.AtendimentoDao;
-import br.com.huetech.controleimoveis.daos.ClienteDao;
-import br.com.huetech.controleimoveis.daos.TipoContatoDao;
-import br.com.huetech.controleimoveis.daos.EnderecoDao;
-import br.com.huetech.controleimoveis.models.Cliente;
-import br.com.huetech.controleimoveis.models.TipoImovel;
-import br.com.huetech.controleimoveis.models.CaracteristicaImovel;
 import br.com.huetech.controleimoveis.daos.CaracteristicaImovelDao;
+import br.com.huetech.controleimoveis.daos.ClienteDao;
+import br.com.huetech.controleimoveis.daos.EnderecoDao;
+import br.com.huetech.controleimoveis.daos.TipoContatoDao;
 import br.com.huetech.controleimoveis.daos.TipoImovelDao;
-import br.com.huetech.controleimoveis.models.Endereco;
-import br.com.huetech.controleimoveis.models.TipoPretensao;
+import br.com.huetech.controleimoveis.daos.TipoPretensaoDao;
+import br.com.huetech.controleimoveis.models.Atendimento;
 
 @Controller
 @RequestMapping("/atendimento")

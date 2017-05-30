@@ -12,14 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import br.com.huetech.controleimoveis.models.CaracteristicaImovel;
 import br.com.huetech.controleimoveis.daos.CaracteristicaImovelDao;
-import br.com.huetech.controleimoveis.daos.TipoImovelDao;
-import br.com.huetech.controleimoveis.models.Endereco;
-import br.com.huetech.controleimoveis.models.Imovel;
 import br.com.huetech.controleimoveis.daos.EnderecoDao;
 import br.com.huetech.controleimoveis.daos.ImovelDao;
-import br.com.huetech.controleimoveis.models.TipoImovel;
+import br.com.huetech.controleimoveis.daos.TipoImovelDao;
+import br.com.huetech.controleimoveis.models.Imovel;
 
 @Controller
 @RequestMapping("/imovel")
