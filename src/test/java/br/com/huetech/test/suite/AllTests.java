@@ -9,7 +9,7 @@ import org.openqa.selenium.WebDriver;
 import br.com.huetech.common.Property;
 import br.com.huetech.common.Selenium;
 /**
- * Classe que agrupa todas as classes de teste, funcionando com uma suíte de regressão.
+ * Classe que agrupa todas as classes de teste, funcionando com uma suï¿½te de regressï¿½o.
  * @author jcan
  *
  */
@@ -25,7 +25,7 @@ protected static WebDriver driver;
 	public static void beforeClass() throws Exception {
 		isAllTestsExecution = true;
 		driver = Selenium.getDriver();
-		driver.navigate().to(Property.URL_PODIO);
+		driver.navigate().to(Property.URL);
 	}
 
 	@AfterClass

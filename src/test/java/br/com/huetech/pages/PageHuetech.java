@@ -18,19 +18,19 @@ import br.com.huetech.common.Property;
 import br.com.huetech.common.Selenium;
 import br.com.huetech.util.Utils;
 
-public abstract class PagePodio<T> {
+public abstract class PageHuetech<T> {
 
-	private static final String URL_PODIO = Property.URL_PODIO;
+	private static final String URL_HUETECH = Property.URL;
 	private static final int LOAD_TIMEOUT = 15;
 	private String windowHandleJanelaInicial;
 
-	public PagePodio() {
+	public PageHuetech() {
 		PageFactory.initElements(Selenium.getDriver(), this);
 	}
 
-	public T abrirPaginaPodio(Class<T> clazz) {
+	public T abrirPagina(Class<T> clazz) {
 		T pagina = PageFactory.initElements(Selenium.getDriver(), clazz);
-		Selenium.getDriver().navigate().to(URL_PODIO);
+		Selenium.getDriver().navigate().to(URL_HUETECH);
 		return pagina;
 	}
 
