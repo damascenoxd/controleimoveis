@@ -12,15 +12,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-<<<<<<< HEAD
-import br.com.huetech.controleimoveis.models.Telefone;
-import br.com.huetech.controleimoveis.repositories.ClienteRepository;
-import br.com.huetech.controleimoveis.models.Endereco;
-=======
-import br.com.huetech.controleimoveis.daos.ClienteDao;
->>>>>>> 3a59cd0ba89c2b4b3b9b5aeaf69f497721ede73e
-import br.com.huetech.controleimoveis.daos.EnderecoDao;
 import br.com.huetech.controleimoveis.models.Cliente;
+import br.com.huetech.controleimoveis.repositories.ClienteRepository;
+import br.com.huetech.controleimoveis.repositories.EnderecoRepository;
+import br.com.huetech.controleimoveis.repositories.TelefoneRepository;
 
 @Controller
 @RequestMapping("/cliente")
@@ -28,9 +23,9 @@ import br.com.huetech.controleimoveis.models.Cliente;
 public class ClienteController {
 
 	@Autowired
-	private EnderecoDao enderecoDao;
+	private EnderecoRepository enderecoRepository;
 	@Autowired
-	private TelefoneDao telefoneDao;
+	private TelefoneRepository telefoneRepository;
 
 	@Autowired
 	private ClienteRepository clienteRepository;
@@ -43,8 +38,8 @@ public class ClienteController {
 	}
 
 	private ModelAndView loadFormDependencies(ModelAndView modelAndView) {
-		modelAndView.addObject("enderecoList", enderecoDao.all());
-		modelAndView.addObject("telefoneList", telefoneDao.all());
+		modelAndView.addObject("enderecoList", enderecoRepository.findAll());
+		modelAndView.addObject("telefoneList", telefoneRepository.findAll());
 		return modelAndView;
 	}
 
