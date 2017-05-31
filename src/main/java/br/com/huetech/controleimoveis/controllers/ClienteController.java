@@ -12,11 +12,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+<<<<<<< HEAD
 import br.com.huetech.controleimoveis.models.Telefone;
 import br.com.huetech.controleimoveis.repositories.ClienteRepository;
 import br.com.huetech.controleimoveis.models.Endereco;
+=======
+import br.com.huetech.controleimoveis.daos.ClienteDao;
+>>>>>>> 3a59cd0ba89c2b4b3b9b5aeaf69f497721ede73e
 import br.com.huetech.controleimoveis.daos.EnderecoDao;
-import br.com.huetech.controleimoveis.daos.TelefoneDao;
 import br.com.huetech.controleimoveis.models.Cliente;
 
 @Controller
