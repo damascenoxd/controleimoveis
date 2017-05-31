@@ -33,6 +33,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Jarbas Junior/Git/selenium-2.53.1"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

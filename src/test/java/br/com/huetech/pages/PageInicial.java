@@ -6,7 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import br.com.huetech.common.Selenium;
 
-public class PageInicial extends PagePodio<PageInicial> {
+public class PageInicial extends PageHuetech<PageInicial> {
 
 	public PageInicial() {
 		PageFactory.initElements(Selenium.getDriver(), this);

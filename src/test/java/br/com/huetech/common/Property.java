@@ -14,7 +14,7 @@ public abstract class Property {
 	public static       String IE64_DRIVE_PATH;
 	public static       String FIREFOX_DRIVE_PATH;
 	public static final String BROWSER_NAME;
-	public static final String URL_PODIO;
+	public static final String URL;
 	public static final String LOGIN;
 	public static final String PASSWORD;
 	
@@ -25,7 +25,7 @@ public abstract class Property {
 		IE64_DRIVE_PATH    = new File("").getAbsolutePath() + "\\src\\main\\resources\\IEDriverServer.exe";
 		FIREFOX_DRIVE_PATH = new File("").getAbsolutePath() + "%PROGRAMFILES%\\Mozilla Firefox\\firefox.exe";
 		BROWSER_NAME       = get("browser.name");
-		URL_PODIO          = get("site.address");
+		URL                = get("site.address");
 		LOGIN              = get("login");
 		PASSWORD           = get("password");
 	}

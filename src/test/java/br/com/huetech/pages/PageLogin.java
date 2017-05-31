@@ -13,7 +13,7 @@ import br.com.huetech.common.Selenium;
 /*
  * Executa todas as acoes na pagina formulario simples
  */
-public class PageLogin extends PagePodio<PageLogin> {
+public class PageLogin extends PageHuetech<PageLogin> {
 
 	public PageLogin(){
 		PageFactory.initElements(Selenium.getDriver(), this);
@@ -32,7 +32,7 @@ public class PageLogin extends PagePodio<PageLogin> {
 	WebElement checkLembrar;
 	
 	public void fazerLoginPodio(){
-		abrirPaginaPodio(PageLogin.class);
+		abrirPagina(PageLogin.class);
 		aguardarElementoVisivel(checkLembrar);
 		preencherCampo(campoEmail, Property.LOGIN);
 		preencherCampo(campoSenha, Property.PASSWORD);

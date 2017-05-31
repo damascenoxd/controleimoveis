@@ -9,7 +9,7 @@ import br.com.huetech.common.Selenium;
 import br.com.huetech.test.suite.AllTests;
 
 /**
- * Classe base de testes, que inicializa o driver no início dos testes e encerra o driver ao final da execução.
+ * Classe base de testes, que inicializa o driver no inï¿½cio dos testes e encerra o driver ao final da execuï¿½ï¿½o.
  * @author jcan
  *
  */
@@ -22,7 +22,7 @@ public class BaseTestCase {
 	public static void beforeClass() throws Exception {	
 		if (!AllTests.isAllTestsExecution){
 			driver = Selenium.getDriver();
-			driver.navigate().to(Property.URL_PODIO);
+			driver.navigate().to(Property.URL);
 			driver.manage().window().maximize();
 		}
 	}
