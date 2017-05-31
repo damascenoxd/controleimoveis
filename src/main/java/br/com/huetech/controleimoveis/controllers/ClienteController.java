@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.huetech.controleimoveis.models.Telefone;
+import br.com.huetech.controleimoveis.repositories.ClienteRepository;
 import br.com.huetech.controleimoveis.models.Endereco;
-import br.com.huetech.controleimoveis.daos.ClienteDao;
 import br.com.huetech.controleimoveis.daos.EnderecoDao;
 import br.com.huetech.controleimoveis.daos.TelefoneDao;
 import br.com.huetech.controleimoveis.models.Cliente;
@@ -22,77 +22,71 @@ import br.com.huetech.controleimoveis.models.Cliente;
 @Controller
 @RequestMapping("/cliente")
 @Transactional
-public class ClienteController
-{
+public class ClienteController {
 
-   @Autowired
-   private ClienteDao clienteDao;
-   @Autowired
-   private EnderecoDao enderecoDao;
-   @Autowired
-   private TelefoneDao telefoneDao;
+	@Autowired
+	private EnderecoDao enderecoDao;
+	@Autowired
+	private TelefoneDao telefoneDao;
 
-   @RequestMapping("/form")
-   public ModelAndView form(Cliente cliente)
-   {
-      ModelAndView modelAndView = new ModelAndView("cliente/form-add");
-      return loadFormDependencies(modelAndView);
+	@Autowired
+	private ClienteRepository clienteRepository;
 
-   }
+	@RequestMapping("/form")
+	public ModelAndView form(Cliente cliente) {
+		ModelAndView modelAndView = new ModelAndView("cliente/form-add");
+		return loadFormDependencies(modelAndView);
 
-   private ModelAndView loadFormDependencies(ModelAndView modelAndView)
-   {
-      modelAndView.addObject("enderecoList", enderecoDao.all());
-      modelAndView.addObject("telefoneList", telefoneDao.all());
-      return modelAndView;
-   }
+	}
 
-   @RequestMapping(method = RequestMethod.POST)
-   public ModelAndView save(@Valid Cliente cliente, BindingResult bindingResult)
-   {
-      if (bindingResult.hasErrors())
-      {
-         return form(cliente);
-      }
-      clienteDao.save(cliente);
-      return new ModelAndView("redirect:/cliente");
-   }
+	private ModelAndView loadFormDependencies(ModelAndView modelAndView) {
+		modelAndView.addObject("enderecoList", enderecoDao.all());
+		modelAndView.addObject("telefoneList", telefoneDao.all());
+		return modelAndView;
+	}
 
-   @RequestMapping(method = RequestMethod.GET, value = "/{id}")
-   public ModelAndView load(@PathVariable("id") Integer id)
-   {
-      ModelAndView modelAndView = new ModelAndView("cliente/form-update");
-      modelAndView.addObject("cliente", clienteDao.findById(id));
-      loadFormDependencies(modelAndView);
-      return modelAndView;
-   }
+	@RequestMapping(method = RequestMethod.POST)
+	public ModelAndView save(@Valid Cliente cliente, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return form(cliente);
+		}
+		// clienteDao.save(cliente);
+		clienteRepository.save(cliente);
+		return new ModelAndView("redirect:/cliente");
+	}
 
-   @RequestMapping(method = RequestMethod.GET)
-   public ModelAndView list(@RequestParam(defaultValue = "0", required = false) int page)
-   {
-      ModelAndView modelAndView = new ModelAndView("cliente/list");
-      modelAndView.addObject("paginatedList", clienteDao.paginated(page, 10));
-      return modelAndView;
-   }
+	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
+	public ModelAndView load(@PathVariable("id") Integer id) {
+		ModelAndView modelAndView = new ModelAndView("cliente/form-update");
+		modelAndView.addObject("cliente", clienteRepository.findById(id));
+		loadFormDependencies(modelAndView);
+		return modelAndView;
+	}
 
-   //just because get is easier here. Be my guest if you want to change.
-   @RequestMapping(method = RequestMethod.GET, value = "/remove/{id}")
-   public String remove(@PathVariable("id") Integer id)
-   {
-      Cliente cliente = clienteDao.findById(id);
-      clienteDao.remove(cliente);
-      return "redirect:/cliente";
-   }
+	// TO DO PAGINAÇÃO
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView list(@RequestParam(defaultValue = "0", required = false) int page) {
+		ModelAndView modelAndView = new ModelAndView("cliente/list");
+		// modelAndView.addObject("paginatedList", clienteDao.paginated(page,
+		// 10));
+		return modelAndView;
+	}
 
-   @RequestMapping(method = RequestMethod.POST, value = "/{id}")
-   public ModelAndView update(@PathVariable("id") Integer id, @Valid Cliente cliente, BindingResult bindingResult)
-   {
-      cliente.setId(id);
-      if (bindingResult.hasErrors())
-      {
-         return loadFormDependencies(new ModelAndView("cliente/form-update"));
-      }
-      clienteDao.update(cliente);
-      return new ModelAndView("redirect:/cliente");
-   }
+	// just because get is easier here. Be my guest if you want to change.
+	@RequestMapping(method = RequestMethod.GET, value = "/remove/{id}")
+	public String remove(@PathVariable("id") Integer id) {
+		Cliente cliente = clienteRepository.findById(id);
+		clienteRepository.delete(cliente);
+		return "redirect:/cliente";
+	}
+
+	@RequestMapping(method = RequestMethod.POST, value = "/{id}")
+	public ModelAndView update(@PathVariable("id") Integer id, @Valid Cliente cliente, BindingResult bindingResult) {
+		cliente.setId(id);
+		if (bindingResult.hasErrors()) {
+			return loadFormDependencies(new ModelAndView("cliente/form-update"));
+		}
+		clienteRepository.save(cliente);
+		return new ModelAndView("redirect:/cliente");
+	}
 }
