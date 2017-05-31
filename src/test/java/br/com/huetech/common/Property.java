@@ -10,8 +10,8 @@ import java.util.Properties;
 */
 public abstract class Property {
 
-	public static       String CHROME_DRIVE_PATH;
 	public static       String IE64_DRIVE_PATH;
+	public static       String CHROME_DRIVE_PATH;
 	public static       String FIREFOX_DRIVE_PATH;
 	public static final String BROWSER_NAME;
 	public static final String URL;
@@ -21,8 +21,8 @@ public abstract class Property {
 	private static final String PROPERTIES_FILE = "br/com/huetech/config.properties";
 	
 	static{
-		CHROME_DRIVE_PATH  = new File("").getAbsolutePath() + "\\src\\main\\resources\\chromedriver.exe";
-		IE64_DRIVE_PATH    = new File("").getAbsolutePath() + "\\src\\main\\resources\\IEDriverServer.exe";
+		IE64_DRIVE_PATH    = new File("").getAbsolutePath() + "\\src\\test\\resources\\IEDriverServer.exe";
+		CHROME_DRIVE_PATH  = new File("").getAbsolutePath() + "\\src\\test\\resources\\chromedriver.exe";
 		FIREFOX_DRIVE_PATH = new File("").getAbsolutePath() + "%PROGRAMFILES%\\Mozilla Firefox\\firefox.exe";
 		BROWSER_NAME       = get("browser.name");
 		URL                = get("site.address");
