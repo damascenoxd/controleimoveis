@@ -1,0 +1,13 @@
+2017-07-09 12:54:19,571 [Worker-3] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: br.com.huetech:controleimoveis:1.0.0-SNAPSHOT @ C:\Users\Jarbas Junior\Git\controleimoveis\pom.xml.
+2017-07-09 12:54:27,555 [Worker-3] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /controleimoveis/src/main/java
+2017-07-09 12:54:27,556 [Worker-3] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /controleimoveis/src/main/resources
+2017-07-09 12:54:27,629 [Worker-3] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /controleimoveis/src/main/resources
+2017-07-09 12:54:27,908 [Worker-3] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /controleimoveis/src/test/java
+2017-07-09 12:54:27,910 [Worker-3] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /controleimoveis/src/test/resources
+2017-07-09 12:54:29,458 [Worker-1] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: br.com.huetech:controleimoveis:1.0.0-SNAPSHOT @ C:\Users\Jarbas Junior\Git\controleimoveis\pom.xml.
+2017-07-09 12:54:34,173 [Worker-3] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Imported and configured 1 project(s) in 20 sec
+2017-07-09 12:54:51,162 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-07-09 12:54:51,172 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2017-07-09 12:54:51,203 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2017-07-09 12:54:51,203 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2017-07-09 12:54:51,203 [Worker-1] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 6 resources
