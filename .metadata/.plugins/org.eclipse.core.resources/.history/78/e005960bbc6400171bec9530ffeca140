@@ -1,7 +1,0 @@
-#browser.name=ie
-#browser.name=chrome
-browser.name=firefox
-
-site.address=localhost:8080/
-login=root
-password=root
