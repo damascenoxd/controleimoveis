@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.huetech.controleimoveis.models.Usuario;
@@ -47,10 +46,9 @@ public class UsuarioController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(defaultValue = "0", required = false) int page) {
+	public ModelAndView list() {
 		ModelAndView modelAndView = new ModelAndView("usuario/list");
-		// modelAndView.addObject("paginatedList", usuarioDao.paginated(page,
-		// 10));
+		modelAndView.addObject("findAll", usuarioRepository.findAll());
 		return modelAndView;
 	}
 

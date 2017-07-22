@@ -9,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.huetech.controleimoveis.models.Atendimento;
@@ -77,10 +76,9 @@ public class AtendimentoController {
 
 	// TO DO PAGINAÇÃO
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(defaultValue = "0", required = false) int page) {
+	public ModelAndView list() {
 		ModelAndView modelAndView = new ModelAndView("atendimento/list");
-		// modelAndView.addObject("paginatedList",
-		// atendimentoDao.paginated(page, 10));
+		modelAndView.addObject("findAll", atendimentoRepository.findAll());
 		return modelAndView;
 	}
 
