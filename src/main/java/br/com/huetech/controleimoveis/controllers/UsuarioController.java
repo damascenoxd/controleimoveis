@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.huetech.controleimoveis.models.Usuario;
-import br.com.huetech.controleimoveis.models.UsuarioRepository;
+import br.com.huetech.controleimoveis.repositories.UsuarioRepository;
 
 @Controller
 @RequestMapping("/usuario")

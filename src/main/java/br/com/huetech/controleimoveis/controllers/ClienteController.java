@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.huetech.controleimoveis.models.Cliente;
+import br.com.huetech.controleimoveis.repositories.BairroRepository;
 import br.com.huetech.controleimoveis.repositories.ClienteRepository;
 import br.com.huetech.controleimoveis.repositories.EnderecoRepository;
 import br.com.huetech.controleimoveis.repositories.TelefoneRepository;
@@ -23,6 +24,8 @@ public class ClienteController {
 
 	@Autowired
 	private EnderecoRepository enderecoRepository;
+	@Autowired
+	private BairroRepository bairroRepository;
 	@Autowired
 	private TelefoneRepository telefoneRepository;
 	@Autowired
@@ -36,8 +39,9 @@ public class ClienteController {
 	}
 
 	private ModelAndView loadFormDependencies(ModelAndView modelAndView) {
-		modelAndView.addObject("enderecoList", enderecoRepository.findAll());
 		modelAndView.addObject("telefoneList", telefoneRepository.findAll());
+		modelAndView.addObject("enderecoList", enderecoRepository.findAll());
+		modelAndView.addObject("bairroList",bairroRepository.findAll());
 		return modelAndView;
 	}
 
