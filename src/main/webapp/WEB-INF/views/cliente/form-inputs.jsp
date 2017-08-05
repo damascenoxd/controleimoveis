@@ -1,7 +1,7 @@
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <div class="form-group">
-	<label for="nome">nome</label>
+	<label for="nome">Nome:</label>
 	<div class="input-group">
 		<span class="input-group-addon"><i
 			class="glyphicon glyphicon-unchecked"></i></span>
@@ -11,7 +11,7 @@
 	</div>
 </div>
 <div class="form-group">
-	<label for="dataAniversario">dataAniversario</label>
+	<label for="dataAniversario">Data de nascimento:</label>
 	<div class="input-group">
 		<span class="input-group-addon"><i
 			class="glyphicon glyphicon-unchecked"></i></span>
@@ -21,7 +21,7 @@
 	</div>
 </div>
 <div class="form-group">
-	<label for="estadoCivil">estadoCivil</label>
+	<label for="estadoCivil">Estado civil:</label>
 	<div class="input-group">
 		<span class="input-group-addon"><i
 			class="glyphicon glyphicon-unchecked"></i></span>
@@ -31,7 +31,7 @@
 	</div>
 </div>
 <div class="form-group">
-	<label for="profissao">profissao</label>
+	<label for="profissao">Profissão:</label>
 	<div class="input-group">
 		<span class="input-group-addon"><i
 			class="glyphicon glyphicon-unchecked"></i></span>
@@ -41,7 +41,7 @@
 	</div>
 </div>
 <div class="form-group">
-	<label for="cpf">cpf</label>
+	<label for="cpf">CPF:</label>
 	<div class="input-group">
 		<span class="input-group-addon"><i
 			class="glyphicon glyphicon-unchecked"></i></span>
@@ -51,7 +51,7 @@
 	</div>
 </div>
 <div class="form-group">
-	<label for="rg">rg</label>
+	<label for="rg">RG:</label>
 	<div class="input-group">
 		<span class="input-group-addon"><i
 			class="glyphicon glyphicon-unchecked"></i></span>
@@ -61,7 +61,7 @@
 	</div>
 </div>
 <div class="form-group">
-	<label for="renda">renda</label>
+	<label for="renda">Renda bruta:</label>
 	<div class="input-group">
 		<span class="input-group-addon"><i
 			class="glyphicon glyphicon-unchecked"></i></span>
@@ -71,7 +71,7 @@
 	</div>
 </div>
 <div class="form-group">
-	<label for="dataCadastro">dataCadastro</label>
+	<label for="dataCadastro">Data de cadastro:</label>
 	<div class="input-group">
 		<span class="input-group-addon"><i
 			class="glyphicon glyphicon-unchecked"></i></span>
@@ -84,7 +84,7 @@
 <!-- ======================= INICIO ENDEREÇO ======================= -->
 
 <div class="form-group">
-	<label for="cep">cep</label>
+	<label for="cep">CEP:</label>
 	<div class="input-group">
 		<span class="input-group-addon"><i
 			class="glyphicon glyphicon-unchecked"></i></span>
@@ -94,7 +94,7 @@
 	</div>
 </div>
 <div class="form-group">
-	<label for="logradouro">logradouro</label>
+	<label for="logradouro">Rua:</label>
 	<div class="input-group">
 		<span class="input-group-addon"><i
 			class="glyphicon glyphicon-unchecked"></i></span>
@@ -104,7 +104,7 @@
 	</div>
 </div>
 <div class="form-group">
-	<label for="pontoReferencia">pontoReferencia</label>
+	<label for="pontoReferencia">Referência:</label>
 	<div class="input-group">
 		<span class="input-group-addon"><i
 			class="glyphicon glyphicon-unchecked"></i></span>
@@ -114,7 +114,7 @@
 	</div>
 </div>
 <div class="form-group">
-	<label for="numero">numero</label>
+	<label for="numero">Número:</label>
 	<div class="input-group">
 		<span class="input-group-addon"><i
 			class="glyphicon glyphicon-unchecked"></i></span>
@@ -124,7 +124,7 @@
 	</div>
 </div>
 <div class="form-group">
-	<label for="complemento">complemento</label>
+	<label for="complemento">Complemento:</label>
 	<div class="input-group">
 		<span class="input-group-addon"><i
 			class="glyphicon glyphicon-unchecked"></i></span>
@@ -134,12 +134,12 @@
 	</div>
 </div>
 <div class="form-group">
-	<label for="bairro.id">bairro.id</label>
+	<label for="bairro.id">Bairro</label>
 	<div class="input-group">
 		<span class="input-group-addon"><i
 			class="glyphicon glyphicon-unchecked"></i></span>
-		<form:select path='endereco.bairro.id' items='${bairroList}' itemValue='id'
-			itemLabel='nome'>
+		<form:select path='endereco.bairro.id' items='${bairroList}'
+			itemValue='id' itemLabel='nome'>
 		</form:select>
 		<form:errors path='endereco.bairro.id' />
 
@@ -148,15 +148,37 @@
 
 <!-- ======================= FIM DO ENDEREÇO ======================= -->
 
+<!-- <div class="form-group"> -->
+<!-- 	<label for="telefone.id">telefone.id</label> -->
+<!-- 	<div class="input-group"> -->
+<!-- 		<span class="input-group-addon"><i -->
+<!-- 			class="glyphicon glyphicon-unchecked"></i></span> -->
+<%-- 		<form:select path='telefone.id' items='${telefoneList}' itemValue='id' --%>
+<%-- 			itemLabel='telefone'> --%>
+<%-- 		</form:select> --%>
+<%-- 		<form:errors path='telefone.id' /> --%>
+
+<!-- 	</div> -->
+<!-- </div> -->
+
 <div class="form-group">
-	<label for="telefone.id">telefone.id</label>
+	<label for="telefone">telefone</label>
 	<div class="input-group">
 		<span class="input-group-addon"><i
 			class="glyphicon glyphicon-unchecked"></i></span>
-		<form:select path='telefone.id' items='${telefoneList}' itemValue='id'
-			itemLabel='telefone'>
-		</form:select>
-		<form:errors path='telefone.id' />
+		<form:input path='telefone.telefone' type='text' />
+		<form:errors path='telefone.telefone' />
 
 	</div>
 </div>
+<div class="form-group">
+	<label for="operadora">operadora</label>
+	<div class="input-group">
+		<span class="input-group-addon"><i
+			class="glyphicon glyphicon-unchecked"></i></span>
+		<form:input path='telefone.operadora' type='text' />
+		<form:errors path='telefone.operadora' />
+
+	</div>
+</div>
+

@@ -33,7 +33,7 @@ public class Cliente {
 	// TODO telefone multivalorado @OneToMany(cascade=CascadeType.ALL,
 	// mappedBy="telefone")
 	// http://blog.triadworks.com.br/jpa-por-que-voce-deveria-evitar-relacionamento-bidirecional
-	@ManyToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Telefone telefone;
 
 	public Integer getId() {
