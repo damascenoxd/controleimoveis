@@ -1,5 +1,11 @@
 package br.com.huetech.util;
 
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.util.Locale;
+import java.util.Random;
+
+import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -53,6 +59,66 @@ public abstract class Utils {
 		}
 	}
 	
+	public static void assertEquals(Object esperado, Object atual) {
+		try {
+			Assert.assertEquals(esperado, atual);
+		} catch (Exception e) {
+			assertFail("Erro encontrado: Esperado ["+esperado+"], mas retornou ["+atual+"]");
+		}
+	}
+	
+	public static void assertTrue(String message, boolean bol){
+		Assert.assertTrue(message, bol);
+	}
+	
+	public static void assertFail(String message) {
+		Assert.fail(message);
+	}
+	
+	public static String conversorDoubleString(double valor){
+		DecimalFormat df = new DecimalFormat("#,###.00");  
+		String novoValor = df.format(valor);
+		return novoValor;
+	}
+	
+	public static Double conversorStringDouble(String valorString){
+		String valorDouble = valorString.replace(",", "");
+		return Double.valueOf(valorDouble);
+	} 
+	
+	public static String converterValoresFloatToString(Float value) {
+		NumberFormat nf = NumberFormat.getInstance(Locale.ITALY);
+		nf.setMinimumFractionDigits(2);
+		nf.setMaximumFractionDigits(2);
+		return nf.format(value).replace(",","");
+	}
+	
+	public static int geraNumeroEntreIntervalo(int min, int max){
+		Random random = new Random();
+		return random.nextInt((max - min) + 1) + min;
+	}
+	
+	public static String geraNumeroEntre1_99(){
+		return converteInteiroParaString(geraNumeroEntreIntervalo(1, 99));
+	}
+	
+	public static String geraNumeroEntre100_999(){
+		return converteInteiroParaString(geraNumeroEntreIntervalo(100, 999));
+	}
+	
+	public static String geraNumeroEntre1000_10000(){
+		return converteInteiroParaString(geraNumeroEntreIntervalo(1000, 10000));
+	}
+	
+	public static String converteInteiroParaString(int numero){
+		return Integer.toString(numero);
+	}
+	
+	public static int converteStringParaInt(String str){
+		return Integer.parseInt(str);
+	}
+	
+	
 	/**
 	 * M�todo para capturar screenshot
 	 * @param fileName - Nome do arquivo
@@ -67,12 +133,6 @@ public abstract class Utils {
 //		}
 //	}
 //	
-//	public static void assertEqualsParametros(WebElement elemento, String tituloTela, String msgErro) {
-//		if (!elemento.getText().trim().equals(tituloTela)) {
-//			Log.erro("Erro! Par�m. do Sistema >> "+msgErro);
-//		}
-//	}
-//
 //	public static void calculaTempoDoTest(Date tempoInicio, Date tempoFinal) {
 //		long diferencaSegundos = (tempoFinal.getTime() - tempoInicio.getTime()) / (1000);
 //		long diferencaMinutos = (tempoFinal.getTime() - tempoInicio.getTime()) / (1000 * 60);

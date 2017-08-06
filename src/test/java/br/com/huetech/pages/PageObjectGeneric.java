@@ -16,15 +16,15 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import br.com.huetech.common.Property;
 import br.com.huetech.common.Selenium;
-import br.com.huetech.util.Utils;
+import br.com.huetech.util.Log;
 
-public abstract class PageHuetech<T> {
+public abstract class PageObjectGeneric<T> {
 
 	private static final String URL_HUETECH = Property.URL;
-	private static final int LOAD_TIMEOUT = 15;
+	private static final int LOAD_TIMEOUT = 10;
 	private String windowHandleJanelaInicial;
 
-	public PageHuetech() {
+	public PageObjectGeneric() {
 		PageFactory.initElements(Selenium.getDriver(), this);
 	}
 
@@ -39,67 +39,46 @@ public abstract class PageHuetech<T> {
 			element.clear();
 			element.sendKeys(value);
 		} catch (WebDriverException e) {
-//			Utils.takeScreenshot("Erro ao preencher campo " + nomeCampo);
+			Log.erro("["+element+"] não encontrado, valor ["+value+"] não pode ser preenchido.");
+			Assert.fail("["+element+"] não encontrado, valor ["+value+"] não pode ser preenchido.");
 		}
 	}
 	
-	public void preencherCampoObrigatorio(String idCampo, WebElement campoDesabilitado, WebElement campoHabilitado, String value) {
-		try {
-			campoDesabilitado.click();
-			aguardarElementoVisivel(campoHabilitado);
-			preencherCampo(campoHabilitado, value);
-			String prefixoCampoObrigatorio = ".//*[@id='"+idCampo+"']/div[1]/div[2]/div/div[2]/div/ul/li[@class='item ']/div/div[2]/div[1]/span[contains(text(), '";
-			String sufixoCampoObrigatorio = "')]";
-			Utils.wait(1000);
-			WebElement opcaoEscolhida = Selenium.getDriver().findElement(By.xpath(prefixoCampoObrigatorio+value+sufixoCampoObrigatorio));
-			opcaoEscolhida.click();
-		} catch (WebDriverException e) {
-//			Utils.takeScreenshot("Erro ao preencher campo " + nomeCampo);
-		}
-	}
-	
-	public void preencherCampoClicando(WebElement elemento, WebElement elementoHabilitado, String value) {
-		try {
-			elemento.click();
-			aguardarElementoVisivel(elementoHabilitado);
-			elementoHabilitado.sendKeys(value);
-			elementoHabilitado.click();
-		} catch (WebDriverException e) {
-//			Utils.takeScreenshot("Erro ao preencher campo " + nomeCampo);
-		}
-	}
-
 	public void click(WebElement element) {
 		try {
 			aguardarElementoVisivel(element);
 			element.click();
-		} catch (Exception e) {
-//			Utils.takeScreenshot("");
+		} catch (WebDriverException e) {
+			Log.erro("Erro ao clicar no elemento ["+element+"].");
+			Assert.fail("Erro ao clicar no elemento ["+element+"].");
 		}
 	}
 
 	public String getValorAtributo(WebElement element) {
-		return element.getAttribute("value");
-	}
-
-	public void selectElementByVisibleText(WebElement element,
-			String textVisible) {
 		try {
-			new Select(element).selectByVisibleText(textVisible);
-		} catch (NoSuchElementException e) {
-			Assert.fail("Erro ao selecionar no elemento: ["
-					+ element.getTagName() + "] com o o valor: " + textVisible);
+			return element.getAttribute("value");
+		} catch (Exception e) {
+			Log.erro("Erro ao buscar valor de atributo do elemento ["+element+"].");
+			Assert.fail("Erro ao buscar valor de atributo do elemento ["+element+"].");
+			return null;
 		}
 	}
 
-	public void selectElementByVisibleValue(WebElement element,
-			String valueVisibel) {
+	public void selectElementByVisibleText(WebElement element, String textVisible) {
 		try {
-			new Select(element).selectByValue(valueVisibel);
-		} catch (NoSuchElementException e) {
-//			Utils.takeScreenshot("");
-			Assert.fail("Erro ao selecionar no elemento: ["
-					+ element.getTagName() + "] com o o valor: " + valueVisibel);
+			new Select(element).selectByVisibleText(textVisible);
+		} catch (WebDriverException e) {
+			Log.erro("["+element+"] do combobox não encontrado, valor ["+textVisible+"] não pode ser selecionado.");
+			Assert.fail("["+element+"] do combobox não encontrado, valor ["+textVisible+"] não pode ser selecionado.");
+		}
+	}
+
+	public void selectElementByVisibleValue(WebElement element, String valueVisible) {
+		try {
+			new Select(element).selectByValue(valueVisible);
+		} catch (WebDriverException e) {
+			Log.erro("["+element+"] do combobox não encontrado, valor ["+valueVisible+"] não pode ser selecionado.");
+			Assert.fail("["+element+"] do combobox não encontrado, valor ["+valueVisible+"] não pode ser selecionado.");
 		}
 	}
 
@@ -108,7 +87,8 @@ public abstract class PageHuetech<T> {
 			Alert alert = Selenium.getDriver().switchTo().alert();
 			alert.accept();
 		} catch (Exception e) {
-			Assert.fail("Erro ao realizar a confirma��o do Alerta");
+			Log.erro("Erro ao realizar a confirmacao do Alerta");
+			Assert.fail("Erro ao realizar a confirmacao do Alerta");
 		}
 	}
 
@@ -118,6 +98,8 @@ public abstract class PageHuetech<T> {
 			Alert alert = Selenium.getDriver().switchTo().alert();
 			alerta = alert.getText();
 		} catch (Exception e) {
+			Log.erro("Erro ao realizar a confirmacao do Alerta");
+			Assert.fail("Erro ao realizar a confirmacao do Alerta");
 		}
 		return alerta;
 	}
@@ -128,6 +110,7 @@ public abstract class PageHuetech<T> {
 					LOAD_TIMEOUT);
 			driverWait.until(ExpectedConditions.visibilityOf(element));
 		} catch (Exception e) {
+			Log.erro("Tempo excedido para aguardar elemento: " + element);
 			Assert.fail("Tempo excedido para aguardar elemento: " + element);
 		}
 	}
@@ -139,6 +122,7 @@ public abstract class PageHuetech<T> {
 			driverWait.until(ExpectedConditions.textToBePresentInElement(
 					element, text));
 		} catch (Exception e) {
+			Log.erro("Tempo excedido para aguardar elemento: " + element);
 			Assert.fail("Tempo excedido para aguardar elemento: " + element);
 		}
 	}
@@ -161,11 +145,6 @@ public abstract class PageHuetech<T> {
 		return true;
 	}
 	
-	public void selectComboValue(WebElement element, final String value) {
-		Select selectBox = new Select(element); 
-		selectBox.selectByValue(value);
-	}
-
 	public void clicarBotaoDireito(WebElement elemento) {
 		Actions action = new Actions(Selenium.getDriver());
 		action.contextClick(elemento).build().perform();
@@ -223,10 +202,4 @@ public abstract class PageHuetech<T> {
 	public WebElement getElement(By by) {
 		return Selenium.getDriver().findElement(by);
 	}
-
-	// public void isEquals(String esperado, String retornado){
-	// if(!esperado.equals(retornado)){
-	// Log.erro("Erro - Esperado: "+ esperado+ "| mas retornou: "+retornado);
-	// }
-	// }
 }

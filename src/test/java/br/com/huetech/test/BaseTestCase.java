@@ -8,11 +8,6 @@ import br.com.huetech.common.Property;
 import br.com.huetech.common.Selenium;
 import br.com.huetech.test.suite.AllTests;
 
-/**
- * Classe base de testes, que inicializa o driver no in�cio dos testes e encerra o driver ao final da execu��o.
- * @author jcan
- *
- */
 public class BaseTestCase {
 	
 	
@@ -30,7 +25,7 @@ public class BaseTestCase {
 	@AfterClass
 	public static void afterClass() throws Exception {
 		if (!AllTests.isAllTestsExecution){
-			driver.quit();
+			Selenium.resetDriver();
 		}
 	}
 }

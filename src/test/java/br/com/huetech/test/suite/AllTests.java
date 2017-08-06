@@ -9,8 +9,8 @@ import org.openqa.selenium.WebDriver;
 import br.com.huetech.common.Property;
 import br.com.huetech.common.Selenium;
 /**
- * Classe que agrupa todas as classes de teste, funcionando com uma su�te de regress�o.
- * @author jcan
+ * Classe que agrupa todas as classes de teste, funcionando com uma suíte de regressão.
+ * @author Jarbas
  *
  */
 @RunWith(Suite.class)

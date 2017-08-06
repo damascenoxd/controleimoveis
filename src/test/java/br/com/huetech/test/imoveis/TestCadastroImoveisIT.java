@@ -1,12 +1,10 @@
 package br.com.huetech.test.imoveis;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import br.com.huetech.common.Selenium;
 import br.com.huetech.pages.PageInicial;
-import br.com.huetech.pages.PageLogin;
 import br.com.huetech.test.BaseTestCase;
 
 /**
@@ -18,7 +16,6 @@ import br.com.huetech.test.BaseTestCase;
 public class TestCadastroImoveisIT extends BaseTestCase {
 
 	
-	PageLogin            pageLogin            = new PageLogin();
 	PageInicial          pageInicial          = new PageInicial();
 
 	/**
@@ -35,17 +32,12 @@ public class TestCadastroImoveisIT extends BaseTestCase {
 	 */
 
 	@Test
-	public void test(){
-		
-	}
-	@Before
-	public void fazerLogin(){
-		pageLogin.fazerLogin();
-		pageInicial.irParaAreaAdministrativa();
+	public void verificaMsgTipoDuvidaIdadeMenorQue18(){
+		pageInicial.irParaPaginaContato();
 	}
 	
-	@After
+	@Test
 	public void fecharDriver(){
-		Selenium.getDriver().close();
+		
 	}
 }

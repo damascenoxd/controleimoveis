@@ -40,11 +40,18 @@ public class Selenium {
 				driver = new InternetExplorerDriver(capabilities);
 				
 			}else  if (Browser.FIREFOX.equals(browser)){
-				//System.setProperty("webdriver.gecko.driver", "C:\\Users\\Jarbas\\geckodriver.exe");
+				//System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
 				driver = new FirefoxDriver();
 			}
 		}
 		return driver;
+	}
+	
+	public static void resetDriver(){
+		if (driver != null) {
+			driver.close();
+		}
+		driver = null;
 	}
 	
 }
