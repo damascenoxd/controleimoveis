@@ -1,10 +1,9 @@
 package br.com.huetech.test.imoveis;
 
-import org.junit.After;
 import org.junit.Test;
 
-import br.com.huetech.common.Selenium;
-import br.com.huetech.pages.PageInicial;
+import br.com.huetech.pages.PageCliente;
+import br.com.huetech.pages.PageFormularioCliente;
 import br.com.huetech.test.BaseTestCase;
 
 /**
@@ -16,8 +15,9 @@ import br.com.huetech.test.BaseTestCase;
 public class TestCadastroImoveisIT extends BaseTestCase {
 
 	
-	PageInicial          pageInicial          = new PageInicial();
-
+	PageCliente           pageCliente 			= new PageCliente();
+	PageFormularioCliente pageFormularioCliente = new PageFormularioCliente();
+	
 	/**
 	 * HUE-1:
 	 * 
@@ -33,11 +33,7 @@ public class TestCadastroImoveisIT extends BaseTestCase {
 
 	@Test
 	public void verificaMsgTipoDuvidaIdadeMenorQue18(){
-		pageInicial.irParaPaginaContato();
-	}
-	
-	@Test
-	public void fecharDriver(){
-		
+		pageCliente.adicionarCliente();
+		pageFormularioCliente.preencherFormulárioCliente();
 	}
 }
