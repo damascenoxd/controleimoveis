@@ -9,10 +9,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import br.com.huetech.controleimoveis.models.Cliente;
+import br.com.huetech.controleimoveis.repositories.BairroRepository;
 import br.com.huetech.controleimoveis.repositories.ClienteRepository;
 import br.com.huetech.controleimoveis.repositories.EnderecoRepository;
 import br.com.huetech.controleimoveis.repositories.TelefoneRepository;
@@ -25,8 +25,9 @@ public class ClienteController {
 	@Autowired
 	private EnderecoRepository enderecoRepository;
 	@Autowired
+	private BairroRepository bairroRepository;
+	@Autowired
 	private TelefoneRepository telefoneRepository;
-
 	@Autowired
 	private ClienteRepository clienteRepository;
 
@@ -38,8 +39,9 @@ public class ClienteController {
 	}
 
 	private ModelAndView loadFormDependencies(ModelAndView modelAndView) {
-		modelAndView.addObject("enderecoList", enderecoRepository.findAll());
 		modelAndView.addObject("telefoneList", telefoneRepository.findAll());
+		modelAndView.addObject("enderecoList", enderecoRepository.findAll());
+		modelAndView.addObject("bairroList",bairroRepository.findAll());
 		return modelAndView;
 	}
 
@@ -48,7 +50,6 @@ public class ClienteController {
 		if (bindingResult.hasErrors()) {
 			return form(cliente);
 		}
-		// clienteDao.save(cliente);
 		clienteRepository.save(cliente);
 		return new ModelAndView("redirect:/cliente");
 	}
@@ -61,16 +62,13 @@ public class ClienteController {
 		return modelAndView;
 	}
 
-	// TO DO PAGINAÇÃO
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(defaultValue = "0", required = false) int page) {
+	public ModelAndView list() {
 		ModelAndView modelAndView = new ModelAndView("cliente/list");
-		// modelAndView.addObject("paginatedList", clienteDao.paginated(page,
-		// 10));
+		modelAndView.addObject("findAll", clienteRepository.findAll());
 		return modelAndView;
 	}
 
-	// just because get is easier here. Be my guest if you want to change.
 	@RequestMapping(method = RequestMethod.GET, value = "/remove/{id}")
 	public String remove(@PathVariable("id") Integer id) {
 		Cliente cliente = clienteRepository.findById(id);

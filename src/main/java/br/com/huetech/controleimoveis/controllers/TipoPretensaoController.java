@@ -49,8 +49,7 @@ public class TipoPretensaoController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam(defaultValue = "0", required = false) int page) {
 		ModelAndView modelAndView = new ModelAndView("tipoPretensao/list");
-		// modelAndView.addObject("paginatedList",
-		// tipoPretensaoDao.paginated(page, 10));
+		modelAndView.addObject("findAll", tipoPretensaoRepository.findAll());
 		return modelAndView;
 	}
 
