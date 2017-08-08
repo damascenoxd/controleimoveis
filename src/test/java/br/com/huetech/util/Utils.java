@@ -118,7 +118,6 @@ public abstract class Utils {
 		return Integer.parseInt(str);
 	}
 	
-	
 	/**
 	 * M�todo para capturar screenshot
 	 * @param fileName - Nome do arquivo
