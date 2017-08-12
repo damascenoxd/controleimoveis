@@ -77,13 +77,19 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 	
 	}
 	
-	public void criarPlanilhaDadosCliente(int qtdRegistros, List<String> dados){
-
+	public void inserirDadosDoClienteNaPlanilha(String planilha, List<String> dados, int numeroDeRegistros){
 		try {
-			ExcelUtils.getArquivoExcel(Property.PLANILHA_CLIENTE);
-			ExcelUtils.gravaRegistrosExcel(qtdRegistros, Property.PLANILHA_CLIENTE, dados);
+			ExcelUtils.gravaRegistrosExcel(numeroDeRegistros, planilha, dados);
 		} catch (Exception e) {
-			Log.erro("Erro na criação da planilha de dados!", e);
+			Log.erro("Erro na gravação da planilha de dados!", e);
+		}
+	}
+	
+	public void lerArquivoXLS(String planilha){
+		try {
+			ExcelUtils.getArquivoExcel(planilha);
+		} catch (Exception e1) {
+			Log.erro("["+Property.PATH_ARQUIVO_TESTE + Property.ARQUIVO_TESTE_XLS+"] Diretorio nao encontrado!", e1);
 		}
 	}
 }

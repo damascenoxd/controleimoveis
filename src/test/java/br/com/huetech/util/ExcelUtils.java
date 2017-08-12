@@ -69,7 +69,7 @@ public class ExcelUtils {
     }
     
     // Grava os registro no arquivo excel
-    public static void gravaRegistrosExcel(int qtdRegistros, String planilha, List<String> dados) throws Exception{
+    public static void gravaRegistrosExcel(int numeroRegistro, String planilha, List<String> dados) throws Exception{
     	int qtdColunas = 0;
     	
     	switch (planilha) {
@@ -81,7 +81,7 @@ public class ExcelUtils {
 			break;
 		}
     	
-    	for (int linha = 0; linha < qtdRegistros; linha++) {
+    	for (int linha = numeroRegistro; linha == numeroRegistro; linha++) {
 
 			for (int coluna = 0; coluna < qtdColunas; coluna++) {
 				try {

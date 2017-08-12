@@ -70,10 +70,13 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 	@FindBy(id = "celular")
 	WebElement celular;
 	
-	public List<String>  gerarPessoa(){
+	public List<String>  gerarPessoa(int registroAtual, int totalRegistros){
 
-		Selenium.getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL+"t");
-		Selenium.getDriver().navigate().to("http://www.4devs.com.br/gerador_de_pessoas");
+		if (registroAtual == 0) {
+			Selenium.getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL+"t");
+			Selenium.getDriver().navigate().to("http://www.4devs.com.br/gerador_de_pessoas");
+		}
+		
 		List<String> dados = new ArrayList<String>();
 		String renda = Utils.getNumeroStringEntreIntervalo(800, 20000); 
 		
@@ -102,8 +105,11 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 		dados.add(13, bairro.getAttribute("value"));
 		dados.add(14, celular.getAttribute("value"));
 		dados.add(15, Utils.getOperadora());
-		Selenium.getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL+"w");
-		Selenium.getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL+"\t");
+		
+		if (registroAtual == (totalRegistros-1)) {
+			Selenium.getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL+"w");
+			Selenium.getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL+"\t");
+		}
 		return dados;
 	}
 }
