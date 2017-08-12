@@ -43,6 +43,9 @@ public class Log {
 	public static void mensagemErro(String pMensagemFinal,Exception e) {
 		aLogger.error(pMensagemFinal,e);
 	}
+	public static void fail(String pMensagemFinal,Exception e) {
+		aLogger.fatal(pMensagemFinal, e);
+	}
 	public static void msgInicioTeste(String nomeTeste){
 		info("=======================================================================================");
 		info("Iniciando teste -> ["+nomeTeste+"]");

@@ -18,9 +18,9 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 		PageFactory.initElements(Selenium.getDriver(), this);
 	}
 
-	/*
-	 * TODO MAPEAR CAPTURA DOS DADOS DE PESSOA
-	 */
+	By msgCarregandoCidades = By.xpath(".//*[@id='cep_cidade']/option[contains(text(),'Carregando cidades...')]");
+	
+	By msgGerandoPessoas = By.xpath(".//*[@id='area_resposta']/div/img[@src='imagens/loader.gif']");
 	
 	@FindBy(id = "idade")
 	WebElement comboIdadde;
@@ -83,11 +83,10 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 		aguardarElementoVisivel(botaoGerarPessoa);
 		selectElementByVisibleValue(comboIdadde, Utils.getNumeroStringEntreIntervalo(18, 80));
 		selectElementByVisibleValue(comboEstado, "PB");
-		Utils.wait(2000);
+		aguardarMensangemDesaparecer(msgCarregandoCidades, 10);
 		selectElementByVisibleText(comboCidade, "João Pessoa");
 		botaoGerarPessoa.click();
-		//*[@id="area_resposta"]/div/img
-		Utils.wait(1000);
+		aguardarMensangemDesaparecer(msgGerandoPessoas, 10);
 		
 		dados.add(0 , nome.getAttribute("value"));
 		dados.add(1 , dataNacimento.getAttribute("value"));

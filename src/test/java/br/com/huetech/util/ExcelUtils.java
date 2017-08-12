@@ -64,7 +64,7 @@ public class ExcelUtils {
 				celula.setCellValue(dados);	
 			}
 		}catch(Exception e){
-			Log.erro("Erro na inserção do valor ["+dados+"]", e);
+			Log.fail("Erro na inserção do valor ["+dados+"]", e);
 		}
     }
     

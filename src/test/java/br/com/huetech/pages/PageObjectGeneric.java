@@ -17,6 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import br.com.huetech.common.Property;
 import br.com.huetech.common.Selenium;
 import br.com.huetech.util.Log;
+import br.com.huetech.util.Utils;
 
 public abstract class PageObjectGeneric<T> {
 
@@ -124,6 +125,18 @@ public abstract class PageObjectGeneric<T> {
 		} catch (Exception e) {
 			Log.erro("Tempo excedido para aguardar elemento: " + element);
 			Assert.fail("Tempo excedido para aguardar elemento: " + element);
+		}
+	}
+	
+	public void aguardarMensangemDesaparecer(By elemento, int limiteSegundos){
+		try {
+			int contadorSegundos = 1;
+			while (isVisibility(elemento) || (limiteSegundos == contadorSegundos)) {
+				Utils.wait(1000);
+				contadorSegundos++;
+			}
+		} catch (Exception e) {
+			Log.erro("Tempo excedido para aguardar elemento: " + elemento, e);
 		}
 	}
 

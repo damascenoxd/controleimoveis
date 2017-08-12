@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.DesiredCapabilities;;
 
 
 
@@ -22,7 +22,7 @@ public class Selenium {
 	/**
 	 * Verifica qual o browser escolhido no arquivo de propriedades
 	 * inicializa o driver apropriado e o retorna
-	 * @return retorna inst�ncia do WebDriver
+	 * @return retorna instância do WebDriver
 	 */
 	public static WebDriver getDriver() {
 		String browser = Property.BROWSER_NAME;
@@ -40,7 +40,7 @@ public class Selenium {
 				driver = new InternetExplorerDriver(capabilities);
 				
 			}else  if (Browser.FIREFOX.equals(browser)){
-				//System.setProperty("webdriver.gecko.driver", "C:\\geckodriver.exe");
+				//System.setProperty("webdriver.gecko.driver", "C:\\Users\\Jarbas Junior\\Git\\controleimoveis\\src\\test\\resources\\geckodriver.exe");
 				driver = new FirefoxDriver();
 			}
 		}
