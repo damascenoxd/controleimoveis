@@ -20,40 +20,84 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 	 * TODO MAPEAR CAPTURA DOS DADOS DE PESSOA
 	 */
 	
+	@FindBy(id = "idade")
+	WebElement comboIdadde;
+	
+	@FindBy(id = "cep_estado")
+	WebElement comboEstado;
+	
+	@FindBy(id = "cep_cidade")
+	WebElement comboCidade;
+	
 	@FindBy(id = "bt_gerar_pessoa")
 	WebElement botaoGerarPessoa;
 	
+	@FindBy(id = "nome")
+	WebElement nome;
+	
+	@FindBy(id = "cpf")
+	WebElement CPF;
+	
+	@FindBy(id = "rg")
+	WebElement RG;
+	
+	@FindBy(id = "data_nasc")
+	WebElement dataNacimento;
+	
+	@FindBy(id = "email")
+	WebElement email;
+	
+	@FindBy(id = "cep")
+	WebElement CEP;
+	
+	@FindBy(id = "endereco")
+	WebElement endereco;
+	
+	@FindBy(id = "numero")
+	WebElement numero;
+	
+	@FindBy(id = "bairoo")
+	WebElement bairro;
+	
+	@FindBy(id = "cidade")
+	WebElement cidade;
+	
+	@FindBy(id = "estado")
+	WebElement estado;
+	
+	@FindBy(id = "celular")
+	WebElement celular;
+	
 	public List<String>  gerarPessoa(){
 		
+		aguardarElementoVisivel(botaoGerarPessoa);
+
+		Selenium.getDriver().navigate().to("http://www.4devs.com.br/gerador_de_pessoas");
 		List<String> dados = new ArrayList<String>();
 		
-		aguardarElementoVisivel(botaoGerarPessoa);
+		selectElementByVisibleValue(comboIdadde, Utils.getNumeroStringEntreIntervalo(18, 80));
+		selectElementByVisibleValue(comboEstado, "PB");
+		Utils.wait(1000);
+		selectElementByVisibleValue(comboCidade, "João Pessoa");
 		botaoGerarPessoa.click();
-		Utils.wait(2000);
+		Utils.wait(3000);
 		
-		dados.add(0, botaoGerarPessoa.getText());
-		dados.add(0, botaoGerarPessoa.getText());
-		dados.add(0, botaoGerarPessoa.getText());
-		dados.add(0, botaoGerarPessoa.getText());
-		dados.add(0, botaoGerarPessoa.getText());
-		dados.add(0, botaoGerarPessoa.getText());
-		dados.add(0, botaoGerarPessoa.getText());
-		dados.add(0, botaoGerarPessoa.getText());
-		dados.add(0, botaoGerarPessoa.getText());
-		dados.add(0, botaoGerarPessoa.getText());
-		dados.add(0, botaoGerarPessoa.getText());
-		dados.add(0, botaoGerarPessoa.getText());
-		dados.add(0, botaoGerarPessoa.getText());
-		dados.add(0, botaoGerarPessoa.getText());
-		dados.add(0, botaoGerarPessoa.getText());
-		dados.add(0, botaoGerarPessoa.getText());
-				//index 2 = estadoCivil
-				//index 3 = profissao
-				//index 6 = rendaBruta
-				//index 7 = dataCadastro
-				//index 11 = referencia
-				//index 13 = complemento
-				//index 16 = operadora
+		dados.add(5 , RG.getText());
+		dados.add(4 , CPF.getText());
+		dados.add(8 , CEP.getText());
+		dados.add(0 , nome.getText());
+		dados.add(13, bairro.getText());
+		dados.add(11, numero.getText());
+		dados.add(14, celular.getText());
+		dados.add(9 , endereco.getText());
+		dados.add(1 , dataNacimento.getText());
+		dados.add(3 , Utils.getProfissao());
+		dados.add(7 , Utils.getDataAtual());
+		dados.add(15, Utils.getOperadora());
+		dados.add(2 , Utils.getEstadoCivil());
+		dados.add(6 , Utils.getNumeroStringEntreIntervalo(800, 20000));
+		dados.add(10, "Ligue para mamãe.");
+		dados.add(12, "Quando chegar, pode perguntar que todo mundo me conhece.");
 		return dados;
 	}
 }

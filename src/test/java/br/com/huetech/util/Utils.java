@@ -2,6 +2,8 @@ package br.com.huetech.util;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
@@ -98,16 +100,8 @@ public abstract class Utils {
 		return random.nextInt((max - min) + 1) + min;
 	}
 	
-	public static String geraNumeroEntre1_99(){
-		return converteInteiroParaString(geraNumeroEntreIntervalo(1, 99));
-	}
-	
-	public static String geraNumeroEntre100_999(){
-		return converteInteiroParaString(geraNumeroEntreIntervalo(100, 999));
-	}
-	
-	public static String geraNumeroEntre1000_10000(){
-		return converteInteiroParaString(geraNumeroEntreIntervalo(1000, 10000));
+	public static String getNumeroStringEntreIntervalo(int min, int max){
+		return converteInteiroParaString(geraNumeroEntreIntervalo(min, max));
 	}
 	
 	public static String converteInteiroParaString(int numero){
@@ -121,26 +115,50 @@ public abstract class Utils {
 	/*
 	 * TODO GERAR DADOS FICTÍCIOS PARA CLIENTES
 	 */
-	public static String geraEstadoCivil(){
+	public static String getEstadoCivil(){
+		List<String> estadoCivil = new ArrayList<String>();
+		estadoCivil.add("Solteiro");
+		estadoCivil.add("Casado");
+		estadoCivil.add("Viúvo");
+		estadoCivil.add("Divorciado");
+		estadoCivil.add("Outros");
+		
+		List<String> sorteio = new ArrayList<String>(estadoCivil);
+		String sorteado = sorteio.remove((int) (Math.random() * sorteio.size()));
+		return sorteado;
+	}
+	
+	public static String getProfissao(){
+		List<String> profissoes = new ArrayList<String>();
+		profissoes.add("Administrador");
+		profissoes.add("Advogado");
+		profissoes.add("Pedagogo");
+		profissoes.add("Contador");
+		profissoes.add("Engenheiro");
+		profissoes.add("Enfermeiro");
+		profissoes.add("Psicólogo");
+		profissoes.add("Bombeiro");
+		profissoes.add("Analista de sistemas");
+		profissoes.add("Odontologista");
+		profissoes.add("Fonoaudilógo");
+		
+		List<String> sorteio = new ArrayList<String>(profissoes);
+		String sorteado = sorteio.remove((int) (Math.random() * sorteio.size()));
+		return sorteado;
+	}
+	public static String getDataAtual(){
 		return null;
 	}
-	public static String geraProfissao(){
-		return null;
-	}
-	public static String geraRenda(){
-		return null;
-	}
-	public static String geraDataAtual(){
-		return null;
-	}
-	public static String geraRefencia(){
-		return null;
-	}
-	public static String geraComplemento(){
-		return null;
-	}
-	public static String geraOperadora(){
-		return null;
+	public static String getOperadora(){
+		List<String> operadora = new ArrayList<String>();
+		operadora.add("Oi");
+		operadora.add("Tim");
+		operadora.add("Claro");
+		operadora.add("Vivo");
+		
+		List<String> sorteio = new ArrayList<String>(operadora);
+		String sorteado = sorteio.remove((int) (Math.random() * sorteio.size()));
+		return sorteado;
 	}
 	
 	/**
