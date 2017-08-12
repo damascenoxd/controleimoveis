@@ -1,11 +1,15 @@
 package br.com.huetech.pages;
 
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import br.com.huetech.common.Property;
 import br.com.huetech.common.Selenium;
-
+import br.com.huetech.util.ExcelUtils;
+import br.com.huetech.util.Log;
 
 public class PageFormularioCliente extends PageObjectGeneric<PageFormularioCliente> {
 
@@ -13,49 +17,11 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 		PageFactory.initElements(Selenium.getDriver(), this);
 	}
 	
-	private String rg;
-	private String cpf;
-	private String cep;
-	private String rua;
-	private String nome;
-	private String renda;
-	private String bairro;
-	private String numero;
-	private String telefone;
-	private String operadora;
-	private String profissao;
-	private String referencia;
-	private String estadoCivil;
-	private String complemento;
-	private String dataCadastro;
-	private String dataNascimento;
 	
+	/*==============================================
+	 * CAMPOS DA APLICAÇÃO DE CADASTRO DE CLIENTES	
+	 */
 	
-
-	public PageFormularioCliente(String rg, String cpf, String cep, String rua,
-			String nome, String renda, String bairro, String numero,
-			String telefone, String operadora, String profissao,
-			String referencia, String estadoCivil, String complemento,
-			String dataCadastro, String dataNascimento) {
-		super();
-		this.rg 			= rg;
-		this.cpf 			= cpf;
-		this.cep 			= cep;
-		this.rua 			= rua;
-		this.nome 			= nome;
-		this.renda 			= renda;
-		this.bairro 		= bairro;
-		this.numero 		= numero;
-		this.telefone 		= telefone;
-		this.operadora 		= operadora;
-		this.profissao 		= profissao;
-		this.referencia 	= referencia;
-		this.estadoCivil 	= estadoCivil;
-		this.complemento 	= complemento;
-		this.dataCadastro   = dataCadastro;
-		this.dataNascimento = dataNascimento;
-	}
-
 	@FindBy(id = "nome")
 	WebElement campoNomeCliente;
 	
@@ -103,24 +69,21 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 	
 	@FindBy(id = "telefone.operadora")
 	WebElement campoOperadora;
+	/*
+	 * =======================================
+	 */
 	
 	public void preencherFormulárioCliente(){
-		preencherCampo(campoNomeCliente, this.nome);
-		preencherCampo(campoDataNascimento, this.dataNascimento);
-		preencherCampo(campoEstadoCivil, this.estadoCivil);
-		preencherCampo(campoProfissao, this.profissao);
-		preencherCampo(campoCPF, this.cpf);
-		preencherCampo(campoRG, this.rg);
-		preencherCampo(campoRendaBruta, this.renda);
-		preencherCampo(campoDataCadastro, this.dataCadastro);
-		preencherCampo(campoCEP, this.cep);
-		preencherCampo(campoRua, this.rua);
-		preencherCampo(campoReferencia, this.referencia);
-		preencherCampo(campoNumero, this.numero);
-		preencherCampo(campoComplemento, this.complemento);
-		preencherCampo(comboBairro, this.bairro);
-		preencherCampo(campoTelefone, this.telefone);
-		preencherCampo(campoOperadora, this.operadora);
+	
 	}
 	
+	public void criarPlanilhaDadosCliente(int qtdRegistros, List<String> dados){
+
+		try {
+			ExcelUtils.getArquivoExcel(Property.PLANILHA_CLIENTE);
+			ExcelUtils.gravaRegistrosExcel(qtdRegistros, Property.PLANILHA_CLIENTE, dados);
+		} catch (Exception e) {
+			Log.erro("Erro na criação da planilha de dados!", e);
+		}
+	}
 }

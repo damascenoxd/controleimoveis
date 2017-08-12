@@ -23,16 +23,16 @@ import br.com.huetech.common.Selenium;
  */
 public abstract class Utils {
 
-	private static final WebDriver driver;
-	private static final WebDriverWait wait;
+	private static final WebDriver     driver;
+	private static final WebDriverWait driverWait;
 
 	static {
 		driver = Selenium.getDriver();
-		wait = new WebDriverWait(driver, 10);
+		driverWait = new WebDriverWait(driver, 10);
 	}
 
 	public static void isVisible(By locator) {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+		driverWait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
 
 	public static void isVisible(String id) {
@@ -40,7 +40,7 @@ public abstract class Utils {
 	}
 
 	public static void isLocated(By locator) {
-		wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+		driverWait.until(ExpectedConditions.presenceOfElementLocated(locator));
 	}
 
 	public static void isLocated(String id) {
@@ -48,7 +48,7 @@ public abstract class Utils {
 	}
 
 	public static void isClickable(WebElement element) {
-		wait.until(ExpectedConditions.elementToBeClickable(element));
+		driverWait.until(ExpectedConditions.elementToBeClickable(element));
 	}
 
 	public static void wait(final int iTimeInMillis) {
@@ -116,6 +116,31 @@ public abstract class Utils {
 	
 	public static int converteStringParaInt(String str){
 		return Integer.parseInt(str);
+	}
+
+	/*
+	 * TODO GERAR DADOS FICTÍCIOS PARA CLIENTES
+	 */
+	public static String geraEstadoCivil(){
+		return null;
+	}
+	public static String geraProfissao(){
+		return null;
+	}
+	public static String geraRenda(){
+		return null;
+	}
+	public static String geraDataAtual(){
+		return null;
+	}
+	public static String geraRefencia(){
+		return null;
+	}
+	public static String geraComplemento(){
+		return null;
+	}
+	public static String geraOperadora(){
+		return null;
 	}
 	
 	/**

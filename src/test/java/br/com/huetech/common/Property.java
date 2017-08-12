@@ -15,6 +15,9 @@ public abstract class Property {
 	public static       String FIREFOX_DRIVE_PATH;
 	public static final String BROWSER_NAME;
 	public static final String URL;
+	public static final String ARQUIVO_TESTE_XLS;
+	public static final String PATH_ARQUIVO_TESTE;
+	public static final String PLANILHA_CLIENTE;
 	
 	private static final String PROPERTIES_FILE = "br/com/huetech/config.properties";
 	
@@ -24,6 +27,9 @@ public abstract class Property {
 		FIREFOX_DRIVE_PATH  = new File("").getAbsolutePath() + "%PROGRAMFILES%\\Mozilla Firefox\\firefox.exe";
 		BROWSER_NAME        = get("browser.name");
 		URL                 = get("site.address");
+		ARQUIVO_TESTE_XLS   = get("xls.teste");
+		PATH_ARQUIVO_TESTE  = get("path.xls");
+		PLANILHA_CLIENTE    = get("planilha.cliente");
 	}
 	
 	/**

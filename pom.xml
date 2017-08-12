@@ -20,8 +20,8 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.poi</groupId>
-			<artifactId>poi</artifactId>
-			<version>3.9</version>
+			<artifactId>poi-ooxml</artifactId>
+			<version>3.16</version>
 		</dependency>
 		<dependency>
 			<groupId>xml-apis</groupId>
