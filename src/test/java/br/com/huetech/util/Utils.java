@@ -2,7 +2,11 @@ package br.com.huetech.util;
 
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -113,7 +117,9 @@ public abstract class Utils {
 	}
 
 	/*
-	 * TODO GERAR DADOS FICTÍCIOS PARA CLIENTES
+	 * ==================================================================
+	 * **************GERA DADOS FICTÍCIOS PARA CLIENTES******************
+	 * ==================================================================
 	 */
 	public static String getEstadoCivil(){
 		List<String> estadoCivil = new ArrayList<String>();
@@ -141,30 +147,39 @@ public abstract class Utils {
 		profissoes.add("Analista de sistemas");
 		profissoes.add("Odontologista");
 		profissoes.add("Fonoaudilógo");
+		profissoes.add("Aposentado");
 		
 		List<String> sorteio = new ArrayList<String>(profissoes);
 		String sorteado = sorteio.remove((int) (Math.random() * sorteio.size()));
 		return sorteado;
 	}
 	public static String getDataAtual(){
-		return null;
+		try {
+			SimpleDateFormat formatDate = new SimpleDateFormat("dd/MM/yyyy");
+			Calendar calendar = new GregorianCalendar();
+			Date data = new Date();
+			calendar.setTime(data);
+			return formatDate.format(data);
+		} catch (Exception e) {
+			Log.erro("Erro ao capturar data atual!", e);
+			return null;
+		}
 	}
 	public static String getOperadora(){
 		List<String> operadora = new ArrayList<String>();
 		operadora.add("Oi");
 		operadora.add("Tim");
-		operadora.add("Claro");
 		operadora.add("Vivo");
+		operadora.add("Claro");
 		
 		List<String> sorteio = new ArrayList<String>(operadora);
 		String sorteado = sorteio.remove((int) (Math.random() * sorteio.size()));
 		return sorteado;
 	}
-	
-	/**
-	 * M�todo para capturar screenshot
-	 * @param fileName - Nome do arquivo
+	/*
+	 * =============================================================================
 	 */
+	
 //	public static void takeScreenshot(String fileName){
 //		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 //		Date data = new Date();

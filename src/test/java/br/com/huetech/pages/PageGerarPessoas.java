@@ -3,6 +3,8 @@ package br.com.huetech.pages;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -56,7 +58,7 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 	@FindBy(id = "numero")
 	WebElement numero;
 	
-	@FindBy(id = "bairoo")
+	@FindBy(id = "bairro")
 	WebElement bairro;
 	
 	@FindBy(id = "cidade")
@@ -69,35 +71,39 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 	WebElement celular;
 	
 	public List<String>  gerarPessoa(){
-		
-		aguardarElementoVisivel(botaoGerarPessoa);
 
+		Selenium.getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL+"t");
 		Selenium.getDriver().navigate().to("http://www.4devs.com.br/gerador_de_pessoas");
 		List<String> dados = new ArrayList<String>();
+		String renda = Utils.getNumeroStringEntreIntervalo(800, 20000); 
 		
+		aguardarElementoVisivel(botaoGerarPessoa);
 		selectElementByVisibleValue(comboIdadde, Utils.getNumeroStringEntreIntervalo(18, 80));
 		selectElementByVisibleValue(comboEstado, "PB");
-		Utils.wait(1000);
-		selectElementByVisibleValue(comboCidade, "João Pessoa");
+		Utils.wait(2000);
+		selectElementByVisibleText(comboCidade, "João Pessoa");
 		botaoGerarPessoa.click();
-		Utils.wait(3000);
+		//*[@id="area_resposta"]/div/img
+		Utils.wait(1000);
 		
-		dados.add(5 , RG.getText());
-		dados.add(4 , CPF.getText());
-		dados.add(8 , CEP.getText());
-		dados.add(0 , nome.getText());
-		dados.add(13, bairro.getText());
-		dados.add(11, numero.getText());
-		dados.add(14, celular.getText());
-		dados.add(9 , endereco.getText());
-		dados.add(1 , dataNacimento.getText());
-		dados.add(3 , Utils.getProfissao());
-		dados.add(7 , Utils.getDataAtual());
-		dados.add(15, Utils.getOperadora());
+		dados.add(0 , nome.getAttribute("value"));
+		dados.add(1 , dataNacimento.getAttribute("value"));
 		dados.add(2 , Utils.getEstadoCivil());
-		dados.add(6 , Utils.getNumeroStringEntreIntervalo(800, 20000));
-		dados.add(10, "Ligue para mamãe.");
+		dados.add(3 , Utils.getProfissao());
+		dados.add(4 , CPF.getAttribute("value"));
+		dados.add(5 , RG.getAttribute("value"));
+		dados.add(6 , renda+",00");
+		dados.add(7 , Utils.getDataAtual());
+		dados.add(8 , CEP.getAttribute("value"));
+		dados.add(9 , endereco.getAttribute("value"));
+		dados.add(10, "Ligue pra mamãe.");
+		dados.add(11, numero.getAttribute("value"));
 		dados.add(12, "Quando chegar, pode perguntar que todo mundo me conhece.");
+		dados.add(13, bairro.getAttribute("value"));
+		dados.add(14, celular.getAttribute("value"));
+		dados.add(15, Utils.getOperadora());
+		Selenium.getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL+"w");
+		Selenium.getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL+"\t");
 		return dados;
 	}
 }

@@ -46,22 +46,22 @@ public class ExcelUtils {
   			String valorCelula = celula.getStringCellValue();
   			return valorCelula;
   		}catch (Exception e){
-  			Log.erro("Erro no diretório na captura da celula", e);
+  			Log.erro("Erro no diretório na captura da célula", e);
 			return"";
   		}
     }
     
     //Realiza a escrita nas células
-    public static void setDadosCelula(String dados,  int numeroLinha, int numeroColuna) throws Exception {
+	public static void setDadosCelula(String dados,  int numeroLinha, int numeroColuna) throws Exception {
 
 		try{
-			linha  = planilha.getRow(0);
-			celula = linha.createCell(1);
+			linha  = planilha.getRow(numeroLinha);
+			celula = linha.getCell(numeroColuna);
 			if (celula == null) {
 				celula = linha.createCell(numeroColuna);
 				celula.setCellValue(dados);
 			} else {
-				celula.setCellValue(dados);
+				celula.setCellValue(dados);	
 			}
 		}catch(Exception e){
 			Log.erro("Erro na inserção do valor ["+dados+"]", e);
@@ -70,12 +70,11 @@ public class ExcelUtils {
     
     // Grava os registro no arquivo excel
     public static void gravaRegistrosExcel(int qtdRegistros, String planilha, List<String> dados) throws Exception{
-    	FileOutputStream fileOut = new FileOutputStream(PATH_ARQUIVO_TESTE + ARQUIVO_TESTE);
     	int qtdColunas = 0;
     	
     	switch (planilha) {
 		case "cliente":
-			qtdColunas = 15;
+			qtdColunas = 16;
 			break;
 
 		default:
@@ -86,15 +85,16 @@ public class ExcelUtils {
 
 			for (int coluna = 0; coluna < qtdColunas; coluna++) {
 				try {
-					setDadosCelula(dados.get(linha), linha, coluna);
+					setDadosCelula(dados.get(coluna), linha, coluna);
+					FileOutputStream fileOut = new FileOutputStream(PATH_ARQUIVO_TESTE + ARQUIVO_TESTE);
 					excelWBook.write(fileOut);
+					fileOut.flush();
+					fileOut.close();
 				} catch (Exception e) {
 					Log.erro("Erro na inserção do valor ["+dados.get(linha)+"]", e);
 				}
 			}
     	}
-		fileOut.flush();
-		fileOut.close();
     }
 }
 
