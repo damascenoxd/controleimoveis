@@ -80,7 +80,7 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 		List<String> dados = new ArrayList<String>();
 		String renda = Utils.getNumeroStringEntreIntervalo(800, 20000); 
 		
-		aguardarElementoVisivel(botaoGerarPessoa);
+		aguardarElementoVisivel(comboIdadde);
 		selectElementByVisibleValue(comboIdadde, Utils.getNumeroStringEntreIntervalo(18, 80));
 		selectElementByVisibleValue(comboEstado, "PB");
 		aguardarMensangemDesaparecer(msgCarregandoCidades, 10);
