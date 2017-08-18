@@ -13,6 +13,7 @@ import java.util.Random;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -179,6 +180,18 @@ public abstract class Utils {
 	/*
 	 * =============================================================================
 	 */
+	
+	public static void abrirNovaJanela(){
+		Selenium.getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL+"n");
+	}
+	
+	public static boolean isMultiplo(int dividendo, int divisor){
+		int resto = (dividendo+1) % divisor;
+		if (resto == 0) {
+			return true;
+		}else
+			return false;		
+	}
 	
 //	public static void takeScreenshot(String fileName){
 //		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);

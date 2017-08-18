@@ -38,6 +38,8 @@ public class Selenium {
 				
 				System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 				driver = new InternetExplorerDriver(capabilities);
+			} else if (Browser.EDGE.equals(browser)) {
+				System.setProperty("webdriver.edge.driver", "drivers/MicrosoftWebDriver.exe");
 				
 			}else  if (Browser.FIREFOX.equals(browser)){
 				//System.setProperty("webdriver.gecko.driver", "C:\\Users\\Jarbas Junior\\Git\\controleimoveis\\src\\test\\resources\\geckodriver.exe");

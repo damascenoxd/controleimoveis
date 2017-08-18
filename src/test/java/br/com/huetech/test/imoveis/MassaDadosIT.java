@@ -14,13 +14,12 @@ public class MassaDadosIT extends BaseTestCase{
 	PageCliente              pageCliente           = new PageCliente();
 	PageGerarPessoas         pageGeraPessoas       = new PageGerarPessoas();
 	PageFormularioCliente    pageFormularioCliente = new PageFormularioCliente();
-	private final static int NUMERO_DE_REGISTROS   = 2;
+	private final static int NUMERO_DE_REGISTROS   = 20;
 	
 	@Test
 	public void criarPlanilhaCliente() {
 		
 		pageFormularioCliente.lerArquivoXLS(Property.PLANILHA_CLIENTE);
-		
 		for (int i = 0; i < NUMERO_DE_REGISTROS; i++) {
 			pageFormularioCliente.inserirDadosDoClienteNaPlanilha(Property.PLANILHA_CLIENTE, pageGeraPessoas.gerarPessoa(i, NUMERO_DE_REGISTROS), i);
 		}

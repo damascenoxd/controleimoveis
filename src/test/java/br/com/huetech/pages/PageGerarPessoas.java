@@ -9,6 +9,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import br.com.huetech.common.Property;
 import br.com.huetech.common.Selenium;
 import br.com.huetech.util.Utils;
 
@@ -75,18 +76,17 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 		if (registroAtual == 0) {
 			Selenium.getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL+"t");
 			Selenium.getDriver().navigate().to("http://www.4devs.com.br/gerador_de_pessoas");
+			selectElementByVisibleValue(comboEstado, "PB");
+			aguardarMensangemDesaparecer(msgCarregandoCidades, Utils.converteStringParaInt(Property.TEMPO_ESPERA));
+			selectElementByVisibleText(comboCidade, "João Pessoa");
 		}
-		
 		List<String> dados = new ArrayList<String>();
+
 		String renda = Utils.getNumeroStringEntreIntervalo(800, 20000); 
-		
 		aguardarElementoVisivel(comboIdadde);
 		selectElementByVisibleValue(comboIdadde, Utils.getNumeroStringEntreIntervalo(18, 80));
-		selectElementByVisibleValue(comboEstado, "PB");
-		aguardarMensangemDesaparecer(msgCarregandoCidades, 10);
-		selectElementByVisibleText(comboCidade, "João Pessoa");
 		botaoGerarPessoa.click();
-		aguardarMensangemDesaparecer(msgGerandoPessoas, 10);
+		aguardarMensangemDesaparecer(msgGerandoPessoas, Utils.converteStringParaInt(Property.TEMPO_ESPERA));
 		
 		dados.add(0 , nome.getAttribute("value"));
 		dados.add(1 , dataNacimento.getAttribute("value"));

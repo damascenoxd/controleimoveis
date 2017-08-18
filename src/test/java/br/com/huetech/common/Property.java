@@ -18,6 +18,7 @@ public abstract class Property {
 	public static final String ARQUIVO_TESTE_XLS;
 	public static final String PATH_ARQUIVO_TESTE;
 	public static final String PLANILHA_CLIENTE;
+	public static final String TEMPO_ESPERA;
 	
 	private static final String PROPERTIES_FILE = "br/com/huetech/config.properties";
 	
@@ -30,6 +31,7 @@ public abstract class Property {
 		ARQUIVO_TESTE_XLS   = get("xls.teste");
 		PATH_ARQUIVO_TESTE  = get("path.xls");
 		PLANILHA_CLIENTE    = get("planilha.cliente");
+		TEMPO_ESPERA        = get("tempo.espera");
 	}
 	
 	/**

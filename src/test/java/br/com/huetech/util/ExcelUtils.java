@@ -56,6 +56,9 @@ public class ExcelUtils {
 
 		try{
 			linha  = planilha.getRow(numeroLinha);
+			if (linha == null) {
+				linha = planilha.createRow(numeroLinha);
+			}
 			celula = linha.getCell(numeroColuna);
 			if (celula == null) {
 				celula = linha.createCell(numeroColuna);

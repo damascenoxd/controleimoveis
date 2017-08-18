@@ -131,12 +131,12 @@ public abstract class PageObjectGeneric<T> {
 	public void aguardarMensangemDesaparecer(By elemento, int limiteSegundos){
 		try {
 			int contadorSegundos = 1;
-			while (isVisibility(elemento) || (limiteSegundos == contadorSegundos)) {
+			while (isVisibility(elemento) && (limiteSegundos != contadorSegundos)) {
 				Utils.wait(1000);
 				contadorSegundos++;
 			}
 		} catch (Exception e) {
-			Log.erro("Tempo excedido para aguardar elemento: " + elemento, e);
+			Log.erro("Tempo excedido para aguardar elemento: " + elemento);
 		}
 	}
 
