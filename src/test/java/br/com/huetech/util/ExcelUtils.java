@@ -2,6 +2,7 @@ package br.com.huetech.util;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -27,6 +28,7 @@ public class ExcelUtils {
 			// Abre arquivo excel
 			FileInputStream arquivoXls = new FileInputStream(PATH_ARQUIVO_TESTE + ARQUIVO_TESTE);
 			excelWBook = new HSSFWorkbook(arquivoXls);
+			Log.info("Arquivo encontrado em: ["+PATH_ARQUIVO_TESTE + ARQUIVO_TESTE+"]");
 		} catch (Exception e) {
 			Log.erro("["+ARQUIVO_TESTE+"] Diretorio nao encontrado!", e);
 		}
@@ -34,23 +36,12 @@ public class ExcelUtils {
 		try {
 			// Define a planilha do arqruivo que será utilizada no teste
 			planilha = excelWBook.getSheet(nomePlanilha);
+			Log.info("Planilha utlizada para teste -> ["+nomePlanilha+"]");
 		} catch (Exception e) {
 			Log.erro("["+nomePlanilha+"] Planilha não encontrada no arquivo", e);
 		}
 	}
 	
-	//Realiza a leitura das células
-    public static String getDadosCelula(int numeroLinha, int numeroColuna) throws Exception{
-		try{
-  			celula = planilha.getRow(numeroLinha).getCell(numeroColuna);
-  			String valorCelula = celula.getStringCellValue();
-  			return valorCelula;
-  		}catch (Exception e){
-  			Log.erro("Erro no diretório na captura da célula", e);
-			return"";
-  		}
-    }
-    
     //Realiza a escrita nas células
 	public static void setDadosCelula(String dados,  int numeroLinha, int numeroColuna) throws Exception {
 
@@ -99,5 +90,46 @@ public class ExcelUtils {
 			}
     	}
     }
+    
+    public static List<String> varrerPlanilha(String planilha, int qtdRegistros){
+    	
+    	List<String> dados = new ArrayList<>();
+    	int qtdColunas = 0;
+    	
+    	switch (planilha) {
+    	case "cliente":
+    		qtdColunas = 16;
+    		break;
+    		
+    	default:
+    		break;
+    	}
+    	
+    	for (int linha = qtdRegistros; linha < qtdRegistros; linha++) {
+    		
+    		for (int coluna = 0; coluna < qtdColunas; coluna++) {
+    			try {
+    			} catch (Exception e) {
+    				Log.erro("Erro na captura do valor ["+dados.get(linha)+"]", e);
+    				return null;
+    			}
+    		}
+    	}
+		return dados;
+    	
+    }
+    
+    //Realiza a leitura das células
+    public static String getDadosCelula(int numeroLinha, int numeroColuna) throws Exception{
+    	try{
+    		celula = planilha.getRow(numeroLinha).getCell(numeroColuna);
+    		String valorCelula = celula.getStringCellValue();
+    		return valorCelula;
+    	}catch (Exception e){
+    		Log.erro("Erro no diretório na captura da célula", e);
+    		return"";
+    	}
+    }
+    
 }
 
