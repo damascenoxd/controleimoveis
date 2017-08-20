@@ -25,4 +25,10 @@ public class MassaDadosIT extends BaseTestCase{
 		}
 	}
 	
+	@Test
+	public void preencherFormularioComSucesso() {
+		
+		pageFormularioCliente.preencherFormulárioCliente(NUMERO_DE_REGISTROS);
+	}
+	
 }

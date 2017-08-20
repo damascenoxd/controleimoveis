@@ -89,21 +89,21 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 		aguardarMensangemDesaparecer(msgGerandoPessoas, Utils.converteStringParaInt(Property.TEMPO_ESPERA));
 		
 		dados.add(0 , nome.getAttribute("value"));
-		dados.add(1 , dataNacimento.getAttribute("value"));
-		dados.add(2 , Utils.getEstadoCivil());
-		dados.add(3 , Utils.getProfissao());
-		dados.add(4 , CPF.getAttribute("value"));
-		dados.add(5 , RG.getAttribute("value"));
-		dados.add(6 , renda+",00");
-		dados.add(7 , Utils.getDataAtual());
-		dados.add(8 , CEP.getAttribute("value"));
-		dados.add(9 , endereco.getAttribute("value"));
-		dados.add(10, "Ligue pra mamãe.");
-		dados.add(11, numero.getAttribute("value"));
-		dados.add(12, "Quando chegar, pode perguntar que todo mundo me conhece.");
-		dados.add(13, bairro.getAttribute("value"));
-		dados.add(14, celular.getAttribute("value"));
-		dados.add(15, Utils.getOperadora());
+		dados.add(1, celular.getAttribute("value"));
+		dados.add(2, Utils.getOperadora());
+		dados.add(3 , dataNacimento.getAttribute("value"));
+		dados.add(4 , Utils.getEstadoCivil());
+		dados.add(5 , Utils.getProfissao());
+		dados.add(6 , CPF.getAttribute("value"));
+		dados.add(7 , RG.getAttribute("value"));
+		dados.add(8 , renda+",00");
+		dados.add(9 , Utils.getDataAtual());
+		dados.add(10 , CEP.getAttribute("value"));
+		dados.add(11 , endereco.getAttribute("value"));
+		dados.add(12, "Ligue pra mamãe.");
+		dados.add(13, numero.getAttribute("value"));
+		dados.add(14, "Quando chegar, pode perguntar que todo mundo me conhece.");
+		dados.add(15, bairro.getAttribute("value"));
 		
 		if (registroAtual == (totalRegistros-1)) {
 			Selenium.getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL+"w");
