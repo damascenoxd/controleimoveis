@@ -99,6 +99,7 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 	
 	public void lerArquivoXLS(String planilha){
 		try {
+			Log.info("Buscando arquivo xls...");
 			ExcelUtils.getArquivoExcel(planilha);
 		} catch (Exception e1) {
 			Log.erro("["+Property.PATH_ARQUIVO_TESTE + Property.ARQUIVO_TESTE_XLS+"] Diretorio nao encontrado!", e1);

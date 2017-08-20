@@ -28,6 +28,7 @@ public class ExcelUtils {
 			// Abre arquivo excel
 			FileInputStream arquivoXls = new FileInputStream(PATH_ARQUIVO_TESTE + ARQUIVO_TESTE);
 			excelWBook = new HSSFWorkbook(arquivoXls);
+			Log.info("Arquivo encontrado em: ["+PATH_ARQUIVO_TESTE + ARQUIVO_TESTE+"]");
 		} catch (Exception e) {
 			Log.erro("["+ARQUIVO_TESTE+"] Diretorio nao encontrado!", e);
 		}
@@ -35,6 +36,7 @@ public class ExcelUtils {
 		try {
 			// Define a planilha do arqruivo que será utilizada no teste
 			planilha = excelWBook.getSheet(nomePlanilha);
+			Log.info("Planilha utlizada para teste -> ["+nomePlanilha+"]");
 		} catch (Exception e) {
 			Log.erro("["+nomePlanilha+"] Planilha não encontrada no arquivo", e);
 		}

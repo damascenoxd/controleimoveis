@@ -11,6 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import br.com.huetech.common.Property;
 import br.com.huetech.common.Selenium;
+import br.com.huetech.util.Log;
 import br.com.huetech.util.Utils;
 
 public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
@@ -74,8 +75,10 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 	public List<String>  gerarPessoa(int registroAtual, int totalRegistros){
 
 		if (registroAtual == 0) {
+			String geraPessoas = "http://www.4devs.com.br/gerador_de_pessoas";
+			Log.info("Navegando para: " + geraPessoas);
 			Selenium.getDriver().findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL+"t");
-			Selenium.getDriver().navigate().to("http://www.4devs.com.br/gerador_de_pessoas");
+			Selenium.getDriver().navigate().to(geraPessoas);
 			selectElementByVisibleValue(comboEstado, "PB");
 			aguardarMensangemDesaparecer(msgCarregandoCidades, Utils.converteStringParaInt(Property.TEMPO_ESPERA));
 			selectElementByVisibleText(comboCidade, "João Pessoa");
@@ -86,8 +89,10 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 		aguardarElementoVisivel(comboIdadde);
 		selectElementByVisibleValue(comboIdadde, Utils.getNumeroStringEntreIntervalo(18, 80));
 		botaoGerarPessoa.click();
+		Log.info("Gerando dados...");
 		aguardarMensangemDesaparecer(msgGerandoPessoas, Utils.converteStringParaInt(Property.TEMPO_ESPERA));
 		
+		Log.info("Capturando dados...");
 		dados.add(0 , nome.getAttribute("value"));
 		dados.add(1, celular.getAttribute("value"));
 		dados.add(2, Utils.getOperadora());
