@@ -1,6 +1,5 @@
 package br.com.huetech.pages;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
@@ -74,19 +73,8 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 	 * =======================================
 	 */
 	
-	public void preencherFormulárioCliente(int qtdRegistros){
-		List<String>     planilha  = lerPlanilha(qtdRegistros);
-		List<WebElement> elementos = new ArrayList<>();
-		
-		for (int linha = planilha.size(); linha < planilha.size(); linha++) {
-    		for (int coluna = 0; coluna < 16; coluna++) {
-    			try {
-    				preencherCampo(elementos.get(linha), planilha.get(coluna));
-    			} catch (Exception e) {
-    				Log.erro("Erro no preenchimento do valor ["+planilha.get(linha)+"], do elemeto["+elementos.get(coluna)+"]", e);
-    			}
-    		}
-    	}
+	public void preencherFormulárioCliente(){
+	
 	}
 	
 	public void inserirDadosDoClienteNaPlanilha(String planilha, List<String> dados, int numeroDeRegistros){
@@ -99,42 +87,9 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 	
 	public void lerArquivoXLS(String planilha){
 		try {
-			Log.info("Buscando arquivo xls...");
 			ExcelUtils.getArquivoExcel(planilha);
 		} catch (Exception e1) {
 			Log.erro("["+Property.PATH_ARQUIVO_TESTE + Property.ARQUIVO_TESTE_XLS+"] Diretorio nao encontrado!", e1);
 		}
-	}
-	
-	public List<String> lerPlanilha(int qtdRegistros){
-		List<String> planilha = new ArrayList<>();
-		try {
-			planilha = ExcelUtils.varrerPlanilha(Property.PLANILHA_CLIENTE, qtdRegistros);
-		} catch (Exception e) {
-			return null;
-		}
-		return planilha;
-	}
-	
-	public List<WebElement> elementosFormulario(){
-		List<WebElement> elementos = new ArrayList<>();
-		
-		elementos.add(campoNomeCliente);
-		elementos.add(campoTelefone);
-		elementos.add(campoOperadora);
-		elementos.add(campoDataNascimento);
-		elementos.add(campoEstadoCivil);
-		elementos.add(campoProfissao);
-		elementos.add(campoCPF);
-		elementos.add(campoRG);
-		elementos.add(campoRendaBruta);
-		elementos.add(campoDataCadastro);
-		elementos.add(campoCEP);
-		elementos.add(campoRua);
-		elementos.add(campoReferencia);
-		elementos.add(campoNumero);
-		elementos.add(campoComplemento);
-		elementos.add(comboBairro);
-		return elementos;
 	}
 }

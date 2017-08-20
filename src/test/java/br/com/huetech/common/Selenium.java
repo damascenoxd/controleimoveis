@@ -26,14 +26,11 @@ public class Selenium {
 	 */
 	public static WebDriver getDriver() {
 		String browser = Property.BROWSER_NAME;
-		
 		if (driver == null) {
-			
 			if (Browser.CHROME.equals(browser)) {
 				File file = new File(Property.CHROME_DRIVE_PATH);
 				System.setProperty("webdriver.chrome.driver", file.getAbsolutePath());
 				driver = new ChromeDriver();
-				
 			} else if (Browser.IE.equals(browser)) {
 				DesiredCapabilities capabilities = DesiredCapabilities.internetExplorer();
 				capabilities.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
@@ -41,7 +38,6 @@ public class Selenium {
 				
 				System.setProperty("webdriver.ie.driver", file.getAbsolutePath());
 				driver = new InternetExplorerDriver(capabilities);
-				
 			} else if (Browser.EDGE.equals(browser)) {
 				System.setProperty("webdriver.edge.driver", "drivers/MicrosoftWebDriver.exe");
 				

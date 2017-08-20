@@ -7,12 +7,10 @@ import br.com.huetech.pages.PageCliente;
 import br.com.huetech.pages.PageFormularioCliente;
 import br.com.huetech.pages.PageGerarPessoas;
 import br.com.huetech.test.BaseTestCase;
-import br.com.huetech.util.Log;
 
 
 public class MassaDadosIT extends BaseTestCase{
 
-	private String           nomeTeste             = null;
 	PageCliente              pageCliente           = new PageCliente();
 	PageGerarPessoas         pageGeraPessoas       = new PageGerarPessoas();
 	PageFormularioCliente    pageFormularioCliente = new PageFormularioCliente();
@@ -20,18 +18,11 @@ public class MassaDadosIT extends BaseTestCase{
 	
 	@Test
 	public void criarPlanilhaCliente() {
-		nomeTeste = "Criar Planilha de Dados [Cliente]";
-		Log.msgInicioTeste(nomeTeste);		
+		
 		pageFormularioCliente.lerArquivoXLS(Property.PLANILHA_CLIENTE);
 		for (int i = 0; i < NUMERO_DE_REGISTROS; i++) {
 			pageFormularioCliente.inserirDadosDoClienteNaPlanilha(Property.PLANILHA_CLIENTE, pageGeraPessoas.gerarPessoa(i, NUMERO_DE_REGISTROS), i);
 		}
-	}
-	
-	@Test
-	public void preencherFormularioComSucesso() {
-		
-		pageFormularioCliente.preencherFormulárioCliente(NUMERO_DE_REGISTROS);
 	}
 	
 }

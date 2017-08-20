@@ -34,5 +34,6 @@ public class TestCadastroImoveisIT extends BaseTestCase {
 	@Test
 	public void verificaMsgTipoDuvidaIdadeMenorQue18(){
 		pageCliente.adicionarCliente();
+		pageFormularioCliente.preencherFormulárioCliente();
 	}
 }
