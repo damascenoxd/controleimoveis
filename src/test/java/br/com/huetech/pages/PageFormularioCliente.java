@@ -7,7 +7,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import br.com.huetech.common.Property;
 import br.com.huetech.common.Selenium;
 import br.com.huetech.util.ExcelUtils;
 import br.com.huetech.util.Log;
@@ -70,50 +69,61 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 	
 	@FindBy(id = "telefone.operadora")
 	WebElement campoOperadora;
+	
+	@FindBy(css = ".btn.btn-success[type='submit']")
+	WebElement botaoSalvar;
+	
+	@FindBy(css = ".btn.btn-success")
+	WebElement botaoNovoCliente;
 	/*
 	 * =======================================
 	 */
 	
-	public void preencherFormulárioCliente(int qtdRegistros){
-		List<String>     planilha  = lerPlanilha(qtdRegistros);
-		List<WebElement> elementos = new ArrayList<>();
+	public void preencherFormularioCliente(){
+
+		int 			 linha         = 0;
+		boolean          isRegistro    = true;
+		String     		 valorCelula   = null;
+		List<WebElement> elementos     = elementosFormulario();
+
+		try {
+			isRegistro = ExcelUtils.isProximaLinha(linha); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		for (int linha = planilha.size(); linha < planilha.size(); linha++) {
-    		for (int coluna = 0; coluna < 16; coluna++) {
+		aguardarElementoVisivel(botaoSalvar);
+		
+		// Varre a planilha enquanto houver registro
+		while (isRegistro){
+    		for (int coluna = 0; coluna < elementos.size(); coluna++) {
     			try {
-    				preencherCampo(elementos.get(linha), planilha.get(coluna));
+    				valorCelula = ExcelUtils.getDadosCelula(linha, coluna);
+    				
+    				Log.info("Inserindo o valor ["+valorCelula+"]");
+
+    				if (coluna == (elementos.size()-1)) {
+						selectElementByVisibleText(elementos.get(coluna), valorCelula);
+					}else
+						preencherCampo(elementos.get(coluna), valorCelula);
     			} catch (Exception e) {
-    				Log.erro("Erro no preenchimento do valor ["+planilha.get(linha)+"], do elemeto["+elementos.get(coluna)+"]", e);
+    				Log.erro("Erro no preenchimento do valor ["+valorCelula+"], do elemento["+elementos.get(coluna)+"]", e);
     			}
     		}
+    		botaoSalvar.click();
+    		// verificar insercao
+    		linha++;
+    		try {
+				isRegistro = ExcelUtils.isProximaLinha(linha);
+				if (isRegistro) {
+					//após correção de Vitor alterar a identificação deste do botão salvar
+					botaoNovoCliente.click();
+					aguardarElementoVisivel(elementos.get(elementos.size()-1));
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
     	}
-	}
-	
-	public void inserirDadosDoClienteNaPlanilha(String planilha, List<String> dados, int numeroDeRegistros){
-		try {
-			ExcelUtils.gravaRegistrosExcel(numeroDeRegistros, planilha, dados);
-		} catch (Exception e) {
-			Log.erro("Erro na gravação da planilha de dados!", e);
-		}
-	}
-	
-	public void lerArquivoXLS(String planilha){
-		try {
-			Log.info("Buscando arquivo xls...");
-			ExcelUtils.getArquivoExcel(planilha);
-		} catch (Exception e1) {
-			Log.erro("["+Property.PATH_ARQUIVO_TESTE + Property.ARQUIVO_TESTE_XLS+"] Diretorio nao encontrado!", e1);
-		}
-	}
-	
-	public List<String> lerPlanilha(int qtdRegistros){
-		List<String> planilha = new ArrayList<>();
-		try {
-			planilha = ExcelUtils.varrerPlanilha(Property.PLANILHA_CLIENTE, qtdRegistros);
-		} catch (Exception e) {
-			return null;
-		}
-		return planilha;
 	}
 	
 	public List<WebElement> elementosFormulario(){

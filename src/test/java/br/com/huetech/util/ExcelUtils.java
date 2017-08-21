@@ -2,7 +2,7 @@ package br.com.huetech.util;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
@@ -14,37 +14,54 @@ import br.com.huetech.common.Property;
 
 public class ExcelUtils {
 
-	private static 		 HSSFRow 	  linha;
-	private static 		 HSSFCell 	  celula;
-	private static 		 HSSFSheet 	  planilha;
-	private static 		 HSSFWorkbook excelWBook;
-	private static final String       ARQUIVO_TESTE 	 = Property.ARQUIVO_TESTE_XLS;
-	private static final String       PATH_ARQUIVO_TESTE = Property.PATH_ARQUIVO_TESTE;
+	private static 		 HSSFRow 	  	  linha              = null;
+	private static 		 HSSFCell 	   	  celula             = null;
+	private static 		 HSSFSheet 	  	  planilha           = null;
+	private static 		 HSSFWorkbook 	  excelWBook         = null;
+	private static       FileInputStream  arquivoEntradaXLS  = null;
+	private static       FileOutputStream arquivoSaidaXLS 	 = null;
+	private static final String       	  ARQUIVO_TESTE 	 = Property.ARQUIVO_TESTE_XLS;
+	private static final String           PATH_ARQUIVO_TESTE = Property.PATH_ARQUIVO_TESTE;
 
 	//Busca o caminho e abre o arquivo excel
 	public static void getArquivoExcel(String nomePlanilha)throws Exception {
 		
+		Log.info("Buscando arquivo xls...");
+		
+		// Abre arquivo excel 
 		try {
-			// Abre arquivo excel
-			FileInputStream arquivoXls = new FileInputStream(PATH_ARQUIVO_TESTE + ARQUIVO_TESTE);
-			excelWBook = new HSSFWorkbook(arquivoXls);
+			arquivoEntradaXLS = new FileInputStream(PATH_ARQUIVO_TESTE + ARQUIVO_TESTE);
+			excelWBook = new HSSFWorkbook(arquivoEntradaXLS);
 			Log.info("Arquivo encontrado em: ["+PATH_ARQUIVO_TESTE + ARQUIVO_TESTE+"]");
 		} catch (Exception e) {
 			Log.erro("["+ARQUIVO_TESTE+"] Diretorio nao encontrado!", e);
 		}
 		
+		// Define a planilha do arqruivo que será utilizada no teste
 		try {
-			// Define a planilha do arqruivo que será utilizada no teste
 			planilha = excelWBook.getSheet(nomePlanilha);
 			Log.info("Planilha utlizada para teste -> ["+nomePlanilha+"]");
 		} catch (Exception e) {
 			Log.erro("["+nomePlanilha+"] Planilha não encontrada no arquivo", e);
 		}
 	}
+
+	//	Fecha arquivo Excel
+	public static void fecharArquivo() {
+		
+		Log.info("Salvando e fechando arquivo ["+ARQUIVO_TESTE+"]...");
+		try {
+			arquivoSaidaXLS.close();
+			Log.info("Arquivo ["+ARQUIVO_TESTE+"] salvo em: ["+PATH_ARQUIVO_TESTE+"]");
+		} catch (IOException e) {
+			Log.erro("Problema no fechamento do arquivo ["+PATH_ARQUIVO_TESTE+ARQUIVO_TESTE);
+		}
+	}
 	
     //Realiza a escrita nas células
 	public static void setDadosCelula(String dados,  int numeroLinha, int numeroColuna) throws Exception {
 
+		Log.info("Inserindo valor ["+dados+"] na célula ["+numeroLinha+"] ["+numeroColuna+"]");
 		try{
 			linha  = planilha.getRow(numeroLinha);
 			if (linha == null) {
@@ -60,6 +77,7 @@ public class ExcelUtils {
 		}catch(Exception e){
 			Log.fail("Erro na inserção do valor ["+dados+"]", e);
 		}
+		Log.info("Valor ["+dados+"] inserido com sucesso");
     }
     
     // Grava os registro no arquivo excel
@@ -80,10 +98,8 @@ public class ExcelUtils {
 			for (int coluna = 0; coluna < qtdColunas; coluna++) {
 				try {
 					setDadosCelula(dados.get(coluna), linha, coluna);
-					FileOutputStream fileOut = new FileOutputStream(PATH_ARQUIVO_TESTE + ARQUIVO_TESTE);
-					excelWBook.write(fileOut);
-					fileOut.flush();
-					fileOut.close();
+					arquivoSaidaXLS = new FileOutputStream(PATH_ARQUIVO_TESTE + ARQUIVO_TESTE);
+					excelWBook.write(arquivoSaidaXLS);
 				} catch (Exception e) {
 					Log.erro("Erro na inserção do valor ["+dados.get(linha)+"]", e);
 				}
@@ -91,44 +107,31 @@ public class ExcelUtils {
     	}
     }
     
-    public static List<String> varrerPlanilha(String planilha, int qtdRegistros){
-    	
-    	List<String> dados = new ArrayList<>();
-    	int qtdColunas = 0;
-    	
-    	switch (planilha) {
-    	case "cliente":
-    		qtdColunas = 16;
-    		break;
-    		
-    	default:
-    		break;
-    	}
-    	
-    	for (int linha = qtdRegistros; linha < qtdRegistros; linha++) {
-    		
-    		for (int coluna = 0; coluna < qtdColunas; coluna++) {
-    			try {
-    			} catch (Exception e) {
-    				Log.erro("Erro na captura do valor ["+dados.get(linha)+"]", e);
-    				return null;
-    			}
-    		}
-    	}
-		return dados;
-    	
-    }
-    
     //Realiza a leitura das células
     public static String getDadosCelula(int numeroLinha, int numeroColuna) throws Exception{
     	try{
     		celula = planilha.getRow(numeroLinha).getCell(numeroColuna);
-    		String valorCelula = celula.getStringCellValue();
-    		return valorCelula;
+    		if (celula == null) {
+				return null;
+			}else{
+				String valorCelula = celula.getStringCellValue();
+				Log.info("Valor ["+valorCelula+"] encontrado na célula ["+numeroLinha+"] ["+numeroColuna+"]");
+				return valorCelula;
+			}
     	}catch (Exception e){
-    		Log.erro("Erro no diretório na captura da célula", e);
-    		return"";
+    		Log.erro("Erro na captura da célula", e);
+    		return null;
     	}
+    }
+    
+    public static boolean isProximaLinha(int linha) throws Exception{
+		
+    	HSSFRow row = planilha.getRow(linha);
+    	if (row == null) {
+			return false;
+		}
+    	return true;
+    	
     }
     
 }
