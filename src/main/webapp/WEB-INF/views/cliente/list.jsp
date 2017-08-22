@@ -18,15 +18,16 @@
                <table class="table">
                   <thead>
                      <tr>
-                        <th>nome</th>
-                        <th>dataAniversario</th>
-                        <th>estadoCivil</th>
-                        <th>profissao</th>
-                        <th>cpf</th>
-                        <th>rg</th>
-                        <th>renda</th>
-                        <th>dataCadastro</th>
-                        <th>actions</th>
+                        <th>Nome</th>
+                        <th>Data de Aniversário</th>
+                        <th>Data de Cadastro</th>
+                        <th>Telefone</th>
+                        <th>Estado Civil</th>
+                        <th>Profissão</th>
+                        <th>CPF</th>
+                        <th>RG</th>
+                        <th>Renda</th>
+                        <th>Ações</th>
                      </tr>
                   </thead>
                   <tbody>
@@ -34,12 +35,13 @@
                         <tr>
                            <td>${object.nome}</td>
                            <td>${object.dataAniversario}</td>
+                           <td>${object.dataCadastro}</td>
+                           <td>${object.telefone.telefone}</td>
                            <td>${object.estadoCivil}</td>
                            <td>${object.profissao}</td>
                            <td>${object.cpf}</td>
                            <td>${object.rg}</td>
                            <td>${object.renda}</td>
-                           <td>${object.dataCadastro}</td>
                            <td>
                               <a href="<c:url value='/cliente'/>/${object.id}"
                                  class="btn btn-warning btn-sm">Editar</a>

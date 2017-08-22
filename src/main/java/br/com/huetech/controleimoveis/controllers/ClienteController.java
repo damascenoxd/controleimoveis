@@ -1,5 +1,7 @@
 package br.com.huetech.controleimoveis.controllers;
 
+import java.util.Date;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -30,7 +32,7 @@ public class ClienteController {
 	private TelefoneRepository telefoneRepository;
 	@Autowired
 	private ClienteRepository clienteRepository;
-
+	
 	@RequestMapping("/form")
 	public ModelAndView form(Cliente cliente) {
 		ModelAndView modelAndView = new ModelAndView("cliente/form-add");
@@ -50,6 +52,8 @@ public class ClienteController {
 		if (bindingResult.hasErrors()) {
 			return form(cliente);
 		}
+		Date now = new Date();
+		cliente.setDataCadastro(now);
 		clienteRepository.save(cliente);
 		return new ModelAndView("redirect:/cliente");
 	}

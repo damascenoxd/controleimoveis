@@ -14,7 +14,6 @@
 						servletRelativeAction="/cliente" method="POST">
       	<%@include file="form-inputs.jsp"%>
         <button type="submit" class="btn btn-success">Salvar</button>
-<!-- cssClass="well"  -->
       </form:form>	
     </div>
   </div>

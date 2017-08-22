@@ -7,7 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -17,7 +16,7 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String dataAniversario;
+	private Date dataAniversario;
 	private String estadoCivil;
 	private String profissao;
 	private String cpf;
@@ -52,11 +51,11 @@ public class Cliente {
 		this.nome = nome;
 	}
 
-	public String getDataAniversario() {
+	public Date getDataAniversario() {
 		return this.dataAniversario;
 	}
 
-	public void setDataAniversario(String dataAniversario) {
+	public void setDataAniversario(Date dataAniversario) {
 		this.dataAniversario = dataAniversario;
 	}
 

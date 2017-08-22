@@ -98,16 +98,16 @@
 	</div>
 </div>
 
-<div class="form-group label-floating">
-	<label for="dataCadastro" class="control-label">Data de
-		cadastro</label>
-	<div class="input-group">
-		<form:input path='dataCadastro' type='text'
-			placeholder="Data de cadastro" class="form-control" />
-		<form:errors path='dataCadastro' />
+<!-- <div class="form-group label-floating"> -->
+<!-- 	<label for="dataCadastro" class="control-label">Data de -->
+<!-- 		cadastro</label> -->
+<!-- 	<div class="input-group"> -->
+<%-- 		<form:input path='dataCadastro' type='text' --%>
+<%-- 			placeholder="Data de cadastro" class="form-control" /> --%>
+<%-- 		<form:errors path='dataCadastro' /> --%>
 
-	</div>
-</div>
+<!-- 	</div> -->
+<!-- </div> -->
 
 
 <!-- ======================= INICIO ENDEREÇO ======================= -->
@@ -186,4 +186,3 @@
 
 <!-- 	</div> -->
 <!-- </div> -->
-
