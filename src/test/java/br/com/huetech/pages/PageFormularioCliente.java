@@ -86,6 +86,7 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 		String     		 valorCelula   = null;
 		List<WebElement> elementos     = elementosFormulario();
 
+		// VERIFICA SE PLANILHA CONTÉM REGISTROS
 		try {
 			isRegistro = ExcelUtils.isProximaLinha(linha); 
 		} catch (Exception e) {
@@ -94,7 +95,7 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 		
 		aguardarElementoVisivel(botaoSalvar);
 		
-		// Varre a planilha enquanto houver registro
+		// VARRE A PLANILHA ENQUANTO HOUVER REGISTROS
 		while (isRegistro){
     		for (int coluna = 0; coluna < elementos.size(); coluna++) {
     			try {
@@ -113,10 +114,11 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
     		botaoSalvar.click();
     		// verificar insercao
     		linha++;
+    		
+    		// VERIFICA SE AINDA HÁ REGISTROS NA PLANILHA
     		try {
 				isRegistro = ExcelUtils.isProximaLinha(linha);
 				if (isRegistro) {
-					//após correção de Vitor alterar a identificação deste do botão salvar
 					botaoNovoCliente.click();
 					aguardarElementoVisivel(elementos.get(elementos.size()-1));
 				}
@@ -126,6 +128,7 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
     	}
 	}
 	
+	// GUARDA TODOS ELEMETOS DO FORMULÁRIO EM UMA LISTA
 	public List<WebElement> elementosFormulario(){
 		List<WebElement> elementos = new ArrayList<>();
 		

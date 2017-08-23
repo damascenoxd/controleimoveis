@@ -1,4 +1,4 @@
-package br.com.huetech.test;
+package br.com.huetech.test.configuration;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

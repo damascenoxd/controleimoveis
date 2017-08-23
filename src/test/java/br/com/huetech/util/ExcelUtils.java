@@ -86,7 +86,7 @@ public class ExcelUtils {
     	
     	switch (planilha) {
 		case "cliente":
-			qtdColunas = 16;
+			qtdColunas = 15;
 			break;
 
 		default:

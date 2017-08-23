@@ -96,7 +96,7 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 		
 		List<String> dados = new ArrayList<String>();
 
-		String renda = Utils.getNumeroStringEntreIntervalo(800, 20000); 
+		String renda = Utils.getNumeroStringEntreIntervalo(800, 5000); 
 		aguardarElementoVisivel(comboIdadde);
 		selectElementByVisibleValue(comboIdadde, Utils.getNumeroStringEntreIntervalo(18, 80));
 		botaoGerarPessoa.click();
@@ -113,13 +113,13 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 		dados.add(6 , CPF.getAttribute("value"));
 		dados.add(7 , RG.getAttribute("value"));
 		dados.add(8 , renda);
-		dados.add(9 , Utils.getDataAtual());
-		dados.add(10, CEP.getAttribute("value"));
-		dados.add(11, endereco.getAttribute("value"));
-		dados.add(12, "Ligue pra mamãe");
-		dados.add(13, numero.getAttribute("value"));
-		dados.add(14, "Quando chegar, pode perguntar que todo mundo me conhece");
-		dados.add(15, bairro.getAttribute("value"));
+		//dados.add(9 , Utils.getDataAtual());
+		dados.add(9 , CEP.getAttribute("value"));
+		dados.add(10, endereco.getAttribute("value"));
+		dados.add(11, "Ligue pra mamãe");
+		dados.add(12, numero.getAttribute("value"));
+		dados.add(13, "Quando chegar, pode perguntar que todo mundo me conhece");
+		dados.add(14, bairro.getAttribute("value"));
 		
 		return dados;
 	}

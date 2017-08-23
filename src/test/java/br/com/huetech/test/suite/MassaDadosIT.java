@@ -1,4 +1,4 @@
-package br.com.huetech.test.imoveis;
+package br.com.huetech.test.suite;
 
 import org.junit.After;
 import org.junit.Before;
@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import br.com.huetech.common.Property;
 import br.com.huetech.pages.PageGerarPessoas;
-import br.com.huetech.test.BaseTestCase;
+import br.com.huetech.test.configuration.BaseTestCase;
 import br.com.huetech.util.ExcelUtils;
 import br.com.huetech.util.Log;
 

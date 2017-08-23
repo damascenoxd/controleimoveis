@@ -1,4 +1,4 @@
-package br.com.huetech.test.imoveis;
+package br.com.huetech.test;
 
 import org.junit.After;
 import org.junit.Before;
@@ -8,7 +8,7 @@ import br.com.huetech.common.Property;
 import br.com.huetech.pages.PageCliente;
 import br.com.huetech.pages.PageFormularioCliente;
 import br.com.huetech.pages.PageGerarPessoas;
-import br.com.huetech.test.BaseTestCase;
+import br.com.huetech.test.configuration.BaseTestCase;
 import br.com.huetech.util.ExcelUtils;
 import br.com.huetech.util.Log;
 
@@ -18,7 +18,7 @@ import br.com.huetech.util.Log;
  * @author Jarbas
  * 
  * */
-public class TestCadastroClienteIT extends BaseTestCase {
+public class TestClienteIT extends BaseTestCase {
 
 	private String           nomeTeste             = null;
 	PageCliente              pageCliente           = new PageCliente();
