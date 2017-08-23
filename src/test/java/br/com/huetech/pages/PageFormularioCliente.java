@@ -43,9 +43,6 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 	@FindBy(id = "renda")
 	WebElement campoRendaBruta;
 	
-	@FindBy(id = "dataCadastro")
-	WebElement campoDataCadastro;
-	
 	@FindBy(id = "endereco.cep")
 	WebElement campoCEP;
 	
@@ -141,7 +138,6 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 		elementos.add(campoCPF);
 		elementos.add(campoRG);
 		elementos.add(campoRendaBruta);
-		elementos.add(campoDataCadastro);
 		elementos.add(campoCEP);
 		elementos.add(campoRua);
 		elementos.add(campoReferencia);

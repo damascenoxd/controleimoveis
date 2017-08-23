@@ -71,7 +71,7 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 	WebElement estado;
 	
 	@FindBy(id = "celular")
-	WebElement celular;
+	WebElement telefoneCelular;
 	
 	public void popularPlanilhaCliente(int qtdRegistros){
 		List<String> pessoas = new ArrayList<>();
@@ -103,18 +103,24 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 		Log.info("Gerando "+registroAtual+"ª lista de dados...");
 		aguardarMensangemDesaparecer(msgGerandoPessoas, Utils.converteStringParaInt(Property.TEMPO_ESPERA));
 		
+		String[] caracteres = {"-","."," "};
+		String   rg         = Utils.removeCaracteres(RG.getAttribute("value") 		      , caracteres);
+		String   cpf        = Utils.removeCaracteres(CPF.getAttribute("value")		      , caracteres);
+		String   cep        = Utils.removeCaracteres(CEP.getAttribute("value")		      , caracteres);
+		String   celular    = Utils.removeCaracteres(telefoneCelular.getAttribute("value"), caracteres);
+		
 		Log.info("Capturando dados...");
 		dados.add(0 , nome.getAttribute("value"));
-		dados.add(1 , celular.getAttribute("value"));
+		dados.add(1 , celular);
 		dados.add(2 , Utils.getOperadora());
 		dados.add(3 , dataNacimento.getAttribute("value"));
 		dados.add(4 , Utils.getEstadoCivil());
 		dados.add(5 , Utils.getProfissao());
-		dados.add(6 , CPF.getAttribute("value"));
-		dados.add(7 , RG.getAttribute("value"));
-		dados.add(8 , renda);
+		dados.add(6 , cpf);
+		dados.add(7 , rg);
+		dados.add(8 , renda+".00");
 		//dados.add(9 , Utils.getDataAtual());
-		dados.add(9 , CEP.getAttribute("value"));
+		dados.add(9 , cep);
 		dados.add(10, endereco.getAttribute("value"));
 		dados.add(11, "Ligue pra mamãe");
 		dados.add(12, numero.getAttribute("value"));

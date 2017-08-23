@@ -193,6 +193,16 @@ public abstract class Utils {
 			return false;		
 	}
 	
+	public static String removeCaracteres(String str, String[] caracteres){
+
+		for (int i = 0; i < caracteres.length; i++) {
+			if (str.contains(caracteres[i])) {
+				str = str.replace(caracteres[i], "");
+			}
+		}
+		return str;
+	}
+	
 //	public static void takeScreenshot(String fileName){
 //		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 //		Date data = new Date();
