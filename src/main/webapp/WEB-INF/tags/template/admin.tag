@@ -156,12 +156,22 @@
 	<%-- 	<script src="<c:url value='/assets/js/bootstrap.min.js'/>"></script> --%>
 	<jsp:invoke fragment="extraScripts" />
 
-
-
-
 </body>
 <!--   Core JS Files   -->
 <script src="/assets/js/jquery.min.js" type="text/javascript"></script>
+<script src="/assets/js/jquery.mask.min.js" type="text/javascript"></script>
+
+<!-- Mascaras para os inputs -->
+<script>
+	$(function() {
+		$("#dataAniversario").mask("00/00/0000");
+		$("#cpf").mask("000.000.000-00");
+		$("input[name='telefone.telefone']").mask("(00)00000-0000");
+// 		$("#renda").mask("#.##0,00", {reverse: true});
+		$("input[name='endereco.cep']").mask("00.000-000");
+	});
+</script>
+
 <script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="/assets/js/material.min.js"></script>
 

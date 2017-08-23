@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 public class Cliente {
 
@@ -16,7 +18,9 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
-	private String dataAniversario;
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date dataAniversario;
 	private String estadoCivil;
 	private String profissao;
 	private String cpf;
@@ -51,11 +55,11 @@ public class Cliente {
 		this.nome = nome;
 	}
 
-	public String getDataAniversario() {
+	public Date getDataAniversario() {
 		return this.dataAniversario;
 	}
 
-	public void setDataAniversario(String dataAniversario) {
+	public void setDataAniversario(Date dataAniversario) {
 		this.dataAniversario = dataAniversario;
 	}
 
