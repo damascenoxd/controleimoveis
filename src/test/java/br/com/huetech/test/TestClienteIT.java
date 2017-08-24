@@ -38,6 +38,14 @@ public class TestClienteIT extends BaseTestCase {
 		pageFormularioCliente.preencherFormularioCliente();
 	}
 	
+	@Test
+	public void excluirClientesComSucesso() {
+		nomeTeste = "excluirClientesComSucesso";
+		Log.msgInicioTeste(nomeTeste);
+		pageCliente.listarClientes();
+		pageCliente.excluirClientes(5);
+	}
+	
 	@After
 	public void fechaArquivoExcel(){
 		Log.msgFimTeste(nomeTeste);
