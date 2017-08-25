@@ -8,13 +8,17 @@ import org.openqa.selenium.WebDriver;
 
 import br.com.huetech.common.Property;
 import br.com.huetech.common.Selenium;
+import br.com.huetech.test.TestClienteIT;
 /**
  * Classe que agrupa todas as classes de teste, funcionando com uma suíte de regressão.
  * @author Jarbas
  *
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({})
+@Suite.SuiteClasses({
+	TestClienteIT.class,
+	MassaDadosIT.class
+})
 
 public class AllTests {
 protected static WebDriver driver;
@@ -26,11 +30,12 @@ protected static WebDriver driver;
 		isAllTestsExecution = true;
 		driver = Selenium.getDriver();
 		driver.navigate().to(Property.URL);
+		driver.manage().window().maximize();
 	}
 
 	@AfterClass
 	public static void afterClass() throws Exception {
-		driver.quit();
+		Selenium.resetDriver();
 	}
 
 }

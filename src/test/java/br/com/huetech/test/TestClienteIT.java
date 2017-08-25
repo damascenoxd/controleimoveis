@@ -43,7 +43,7 @@ public class TestClienteIT extends BaseTestCase {
 		nomeTeste = "excluirClientesComSucesso";
 		Log.msgInicioTeste(nomeTeste);
 		pageCliente.listarClientes();
-		pageCliente.excluirClientes(5);
+		pageCliente.excluirClientes(20);
 	}
 	
 	@After
