@@ -16,8 +16,8 @@ import br.com.huetech.test.TestClienteIT;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-	TestClienteIT.class,
-	MassaDadosIT.class
+	MassaDadosIT.class,
+	TestClienteIT.class
 })
 
 public class AllTests {

@@ -36,6 +36,15 @@ public class TestClienteIT extends BaseTestCase {
 		Log.msgInicioTeste(nomeTeste);
 		pageCliente.adicionarNovoCliente();
 		pageFormularioCliente.preencherFormularioCliente();
+		pageCliente.validaDadosInseridos();
+	}
+	
+	@Test
+	public void pesquisarClientesComSucesso() {
+		nomeTeste = "pesquisarClientesComSucesso";
+		Log.msgInicioTeste(nomeTeste);
+		pageCliente.listarClientes();
+		pageCliente.excluirClientes(20);
 	}
 	
 	@Test

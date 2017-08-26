@@ -9,7 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import br.com.huetech.common.Selenium;
+import br.com.huetech.util.ExcelUtils;
 import br.com.huetech.util.Log;
+import br.com.huetech.util.Utils;
 
 public class PageCliente extends PageObjectGeneric<PageCliente> {
 
@@ -76,6 +78,57 @@ public class PageCliente extends PageObjectGeneric<PageCliente> {
 			}
 		}
 		return clientes;
+	}
+	
+	public void validaDadosInseridos(){
 		
+		int 		 linha         = 0;
+		String       esperado      = "";
+		String       atual         = "";
+		boolean      isRegistro    = true;
+		List<String> dados         = elementosFormulario();
+		
+		// VERIFICA SE PLANILHA CONTÉM REGISTROS
+		try {
+			isRegistro = ExcelUtils.isProximaLinha(linha); 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		// VARRE A PLANILHA ENQUANTO HOUVER REGISTROS
+		while (isRegistro){
+			for (int coluna = 0; coluna < dados.size(); coluna++) {
+				try {
+					esperado = ExcelUtils.getDadosCelula(linha, coluna);
+					atual    = dados.get(coluna);
+					Log.info("Valor esperado (referencia)["+esperado+"], valor exibido ["+atual+"]");
+					Utils.assertEquals(esperado, atual);
+					
+				} catch (Exception e) {
+					Log.erro("Valor esperado (referencia)["+esperado+"], valor exibido ["+atual+"]",e);
+				}
+			}
+			linha++;
+			
+			// VERIFICA SE AINDA HÁ REGISTROS NA PLANILHA
+			try {
+				isRegistro = ExcelUtils.isProximaLinha(linha);
+			} catch (Exception e) {
+				e.printStackTrace();
+			} 
+		}
+	}
+	
+	// GUARDA TODOS ELEMETOS DO FORMULÁRIO EM UMA LISTA
+	public List<String> elementosFormulario(){
+		List<String> dados = new ArrayList<>();
+		String       path  = "";
+		
+		for (int i = 0; i < 8; i++) {
+			path               = "html/body/div[2]/div/div/table/tbody/tr/td[contains(.,'"+dados.get(i)+"')]";
+			WebElement element = Selenium.getDriver().findElement(By.xpath(path));
+			dados.add(element.getText());
+		}
+		return dados;
 	}
 }

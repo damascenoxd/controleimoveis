@@ -91,6 +91,7 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 		}
 		
 		aguardarElementoVisivel(botaoSalvar);
+		Log.info("Iniciando preenchimento do formulário cliente...");
 		
 		// VARRE A PLANILHA ENQUANTO HOUVER REGISTROS
 		while (isRegistro){

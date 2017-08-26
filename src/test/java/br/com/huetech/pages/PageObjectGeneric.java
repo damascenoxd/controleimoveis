@@ -21,9 +21,9 @@ import br.com.huetech.util.Utils;
 
 public abstract class PageObjectGeneric<T> {
 
-	private static final String URL_HUETECH = Property.URL;
-	private static final int LOAD_TIMEOUT = 10;
-	private String windowHandleJanelaInicial;
+	private static final String URL_HUETECH  = Property.URL;
+	private static final int    LOAD_TIMEOUT = 10;
+	private              String windowHandleJanelaInicial;
 
 	public PageObjectGeneric() {
 		PageFactory.initElements(Selenium.getDriver(), this);
