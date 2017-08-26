@@ -78,7 +78,7 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 	
 	public void preencherFormularioCliente(){
 
-		int 			 linha         = 0;
+		int 			 linha         = 19;
 		boolean          isRegistro    = true;
 		String     		 valorCelula   = null;
 		List<WebElement> elementos     = elementosFormulario();
