@@ -178,7 +178,7 @@
 		        }
 		      }
 		    });
-		$("input[name='telefone.telefone']").mask("(ZZ)ZZZZZ-ZZZ",{
+		$("input[name='telefone.telefone']").mask("(ZZ)ZZZZZ-ZZZZ",{
 		    translation: {
 		        'Z': {
 		          pattern: /[0-9]/, optional: false
