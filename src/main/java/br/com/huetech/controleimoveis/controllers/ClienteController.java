@@ -32,7 +32,7 @@ public class ClienteController {
 	private TelefoneRepository telefoneRepository;
 	@Autowired
 	private ClienteRepository clienteRepository;
-	
+
 	@RequestMapping("/form")
 	public ModelAndView form(Cliente cliente) {
 		ModelAndView modelAndView = new ModelAndView("cliente/form-add");
@@ -43,7 +43,7 @@ public class ClienteController {
 	private ModelAndView loadFormDependencies(ModelAndView modelAndView) {
 		modelAndView.addObject("telefoneList", telefoneRepository.findAll());
 		modelAndView.addObject("enderecoList", enderecoRepository.findAll());
-		modelAndView.addObject("bairroList",bairroRepository.findAll());
+		modelAndView.addObject("bairroList", bairroRepository.findAll());
 		return modelAndView;
 	}
 
@@ -51,11 +51,14 @@ public class ClienteController {
 	public ModelAndView save(@Valid Cliente cliente, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return form(cliente);
-		}
+		} // if
+
+		// set data de cadastro
 		Date now = new Date();
 		cliente.setDataCadastro(now);
+
 		clienteRepository.save(cliente);
-		return new ModelAndView("redirect:/cliente");
+		return new ModelAndView("redirect:/cliente?save=sucess");
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
@@ -69,11 +72,9 @@ public class ClienteController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView modelAndView = new ModelAndView("cliente/list");
-		
-		
+
 		modelAndView.addObject("findAll", clienteRepository.findAll());
-		
-		
+
 		return modelAndView;
 	}
 
@@ -91,6 +92,6 @@ public class ClienteController {
 			return loadFormDependencies(new ModelAndView("cliente/form-update"));
 		}
 		clienteRepository.save(cliente);
-		return new ModelAndView("redirect:/cliente");
+		return new ModelAndView("redirect:/cliente?update=sucess");
 	}
 }

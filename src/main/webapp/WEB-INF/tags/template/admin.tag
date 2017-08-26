@@ -38,8 +38,27 @@
 
 	<nav class="navbar navbar-fixed-top navbar-color-on-scroll">
 		<div class="container-fluid">
-			<div class="navbar-header">
 
+
+			<!-- MENSAGEM DE SUCESSO -->
+			<div id="msg-session">
+				<div class="alert alert-success">
+					<div class="container-fluid">
+						<div class="alert-icon">
+							<i class="material-icons">check</i>
+						</div>
+						<button type="button" class="close" data-dismiss="alert"
+							aria-label="Close">
+							<span aria-hidden="true"><i class="material-icons">clear</i></span>
+						</button>
+						<b id="msg"></b>
+					</div>
+				</div>
+			</div>
+
+
+
+			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#menu" aria-expanded="false">
 					<span class="sr-only">Toggle navigation</span> <span
@@ -136,6 +155,8 @@
 	</nav>
 
 	<!-- FINAL NAV -->
+
+
 	<div class="wrapper">
 		<div class="header header-filter"
 			style="background-image: url(&quot;/assets/img/bg_city.jpg&quot;); transform: translate3d(0px, 0px, 0px);">
@@ -152,6 +173,7 @@
 		</div>
 	</div>
 	<jsp:doBody />
+
 	<%-- 	<script src="<c:url value='/assets/js/jquery.min.js'/>"></script> --%>
 	<%-- 	<script src="<c:url value='/assets/js/bootstrap.min.js'/>"></script> --%>
 	<jsp:invoke fragment="extraScripts" />
@@ -164,35 +186,62 @@
 <!-- Mascaras para os inputs -->
 <script>
 	$(function() {
-		$("#dataAniversario").mask('ZZ/ZZ/ZZZZ',{
-		    translation: {
-		        'Z': {
-		          pattern: /[0-9]/, optional: false
-		        }
-		      }
-		    });
-		$("#cpf").mask("ZZZ.ZZZ.ZZZ-ZZ",{
-		    translation: {
-		        'Z': {
-		          pattern: /[0-9]/, optional: false
-		        }
-		      }
-		    });
-		$("input[name='telefone.telefone']").mask("(ZZ)ZZZZZ-ZZZZ",{
-		    translation: {
-		        'Z': {
-		          pattern: /[0-9]/, optional: false
-		        }
-		      }
-		    });
-		$("input[name='endereco.cep']").mask("ZZZZZ-ZZZ",{
-		    translation: {
-		        'Z': {
-		          pattern: /[0-9]/, optional: false
-		        }
-		      }
-		    });
-// 		$("#renda").mask("#.##0,00", {reverse: true});
+		$("#dataAniversario").mask('ZZ/ZZ/ZZZZ', {
+			translation : {
+				'Z' : {
+					pattern : /[0-9]/,
+					optional : false
+				}
+			}
+		});
+		$("#cpf").mask("ZZZ.ZZZ.ZZZ-ZZ", {
+			translation : {
+				'Z' : {
+					pattern : /[0-9]/,
+					optional : false
+				}
+			}
+		});
+		$("input[name='telefone.telefone']").mask("(ZZ)ZZZZZ-ZZZZ", {
+			translation : {
+				'Z' : {
+					pattern : /[0-9]/,
+					optional : false
+				}
+			}
+		});
+		$("input[name='endereco.cep']").mask("ZZZZZ-ZZZ", {
+			translation : {
+				'Z' : {
+					pattern : /[0-9]/,
+					optional : false
+				}
+			}
+		});
+		// 		$("#renda").mask("#.##0,00", {reverse: true});
+	});
+</script>
+
+<!-- ALERTS -->
+<script>
+	$(document).ready(function() {
+		$('#msg-session').hide();
+
+		//o split separa a string quando encontra o ?
+		var url = location.search.split("?");
+		var val = url[1].split("=");
+
+		if (val[1] == "sucess") {
+			$('#msg-session').show();
+
+			if (val[0] == "save") {
+				$("#msg").html("Cliente cadastrado com sucesso!");
+			} //if (val[0] == "save")
+
+			else if (val[0] == "update") {
+				$("#msg").html("Cliente atualizado com sucesso!");
+			} //else if
+		} //if (val[1] == "sucess") 
 	});
 </script>
 
