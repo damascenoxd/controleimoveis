@@ -1,13 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib tagdir="/WEB-INF/tags/template" prefix="template"%>
 <template:admin>
-   <jsp:attribute name="extraStyles">
-      <link rel="stylesheet"
-         href="<c:url value='/assets/css/pagination/jqpagination.css'/>" />
-   </jsp:attribute>
-   <jsp:attribute name="extraScripts">
-      <script src="<c:url value='/assets/js/jquery.jqpagination.js'/>"></script>
-   </jsp:attribute>
    <jsp:body>
       <div class="main main-raised">
          <div class="section section-basic">
@@ -20,7 +13,6 @@
                      <tr>
                         <th>Nome</th>
                         <th>Data de Aniversário</th>
-                        <th>Data de Cadastro</th>
                         <th>Telefone</th>
                         <th>Estado Civil</th>
                         <th>Profissão</th>
@@ -35,7 +27,6 @@
                         <tr>
                            <td>${object.nome}</td>
                            <td>${object.dataAniversario}</td>
-                           <td>${object.dataCadastro}</td>
                            <td>${object.telefone.telefone}</td>
                            <td>${object.estadoCivil}</td>
                            <td>${object.profissao}</td>

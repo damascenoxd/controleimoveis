@@ -12,7 +12,7 @@
 	<div class="input-group">
 		<form:input path='nome' type='text' placeholder="Nome"
 			class="form-control" />
-		<form:errors path='nome' />
+		<form:errors path='nome' ><span class="label label-danger">Nome é obrigatório</span></form:errors>
 	</div>
 </div>
 
@@ -46,7 +46,7 @@
 	<div class="input-group">
 		<form:input path='dataAniversario' type='text'
 			placeholder="Data de nascimento" class="form-control" />
-		<form:errors path='dataAniversario' />
+		<form:errors path='dataAniversario' ><span class="label label-danger">Data de Nascimento inválida</span></form:errors>
 	</div>
 </div>
 
@@ -93,8 +93,7 @@
 	<div class="input-group">
 		<form:input path='renda' type='text' placeholder="Renda bruta"
 			class="form-control" />
-		<form:errors path='renda' />
-
+		<form:errors path='renda'><span class="label label-danger">Valor da renda inválido</span></form:errors>
 	</div>
 </div>
 
