@@ -1,5 +1,7 @@
 package br.com.huetech.controleimoveis.controllers;
 
+import java.util.Date;
+
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -9,18 +11,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-<<<<<<< HEAD
-import br.com.huetech.controleimoveis.models.Telefone;
-import br.com.huetech.controleimoveis.repositories.ClienteRepository;
-import br.com.huetech.controleimoveis.models.Endereco;
-=======
-import br.com.huetech.controleimoveis.daos.ClienteDao;
->>>>>>> 3a59cd0ba89c2b4b3b9b5aeaf69f497721ede73e
-import br.com.huetech.controleimoveis.daos.EnderecoDao;
 import br.com.huetech.controleimoveis.models.Cliente;
+import br.com.huetech.controleimoveis.repositories.BairroRepository;
+import br.com.huetech.controleimoveis.repositories.ClienteRepository;
+import br.com.huetech.controleimoveis.repositories.EnderecoRepository;
+import br.com.huetech.controleimoveis.repositories.TelefoneRepository;
 
 @Controller
 @RequestMapping("/cliente")
@@ -28,10 +25,11 @@ import br.com.huetech.controleimoveis.models.Cliente;
 public class ClienteController {
 
 	@Autowired
-	private EnderecoDao enderecoDao;
+	private EnderecoRepository enderecoRepository;
 	@Autowired
-	private TelefoneDao telefoneDao;
-
+	private BairroRepository bairroRepository;
+	@Autowired
+	private TelefoneRepository telefoneRepository;
 	@Autowired
 	private ClienteRepository clienteRepository;
 
@@ -43,8 +41,9 @@ public class ClienteController {
 	}
 
 	private ModelAndView loadFormDependencies(ModelAndView modelAndView) {
-		modelAndView.addObject("enderecoList", enderecoDao.all());
-		modelAndView.addObject("telefoneList", telefoneDao.all());
+		modelAndView.addObject("telefoneList", telefoneRepository.findAll());
+		modelAndView.addObject("enderecoList", enderecoRepository.findAll());
+		modelAndView.addObject("bairroList", bairroRepository.findAll());
 		return modelAndView;
 	}
 
@@ -52,10 +51,14 @@ public class ClienteController {
 	public ModelAndView save(@Valid Cliente cliente, BindingResult bindingResult) {
 		if (bindingResult.hasErrors()) {
 			return form(cliente);
-		}
-		// clienteDao.save(cliente);
+		} // if
+
+		// set data de cadastro
+		Date now = new Date();
+		cliente.setDataCadastro(now);
+
 		clienteRepository.save(cliente);
-		return new ModelAndView("redirect:/cliente");
+		return new ModelAndView("redirect:/cliente?save=sucess");
 	}
 
 	@RequestMapping(method = RequestMethod.GET, value = "/{id}")
@@ -66,21 +69,20 @@ public class ClienteController {
 		return modelAndView;
 	}
 
-	// TO DO PAGINAÇÃO
 	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView list(@RequestParam(defaultValue = "0", required = false) int page) {
+	public ModelAndView list() {
 		ModelAndView modelAndView = new ModelAndView("cliente/list");
-		// modelAndView.addObject("paginatedList", clienteDao.paginated(page,
-		// 10));
+
+		modelAndView.addObject("findAll", clienteRepository.findAll());
+
 		return modelAndView;
 	}
 
-	// just because get is easier here. Be my guest if you want to change.
 	@RequestMapping(method = RequestMethod.GET, value = "/remove/{id}")
 	public String remove(@PathVariable("id") Integer id) {
 		Cliente cliente = clienteRepository.findById(id);
 		clienteRepository.delete(cliente);
-		return "redirect:/cliente";
+		return "redirect:/cliente?delete=sucess";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/{id}")
@@ -90,6 +92,6 @@ public class ClienteController {
 			return loadFormDependencies(new ModelAndView("cliente/form-update"));
 		}
 		clienteRepository.save(cliente);
-		return new ModelAndView("redirect:/cliente");
+		return new ModelAndView("redirect:/cliente?update=sucess");
 	}
 }

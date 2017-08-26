@@ -23,7 +23,7 @@
 	                  </tr>
                   </thead>
                   <tbody>
-                  <c:forEach items='${paginatedList.currentList}' var='object'>         		
+                  <c:forEach items='${findAll}' var='object'>         		
 	                  <tr>
 						<td><a href="<c:url value='/bairro'/>/${object.id}">${object.id}</a></td>
 		                  	<td>${object.nome}</td>
@@ -34,7 +34,7 @@
                   </c:forEach>
                   </tbody>
           </table>
-		  <template:paginationComponent paginatedList="${paginatedList}" page="${param.page}" action="/bairro"/>
+<%-- 		  <template:paginationComponent paginatedList="${paginatedList}" page="${param.page}" action="/bairro"/> --%>
           <a href="<c:url value='/bairro/form'/>" class="btn btn-success"><span class="glyphicon glyphicon-plus-sign"></span> Add New</a>
         </div>
     </div>
