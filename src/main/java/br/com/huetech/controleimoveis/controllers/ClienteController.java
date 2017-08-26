@@ -82,7 +82,7 @@ public class ClienteController {
 	public String remove(@PathVariable("id") Integer id) {
 		Cliente cliente = clienteRepository.findById(id);
 		clienteRepository.delete(cliente);
-		return "redirect:/cliente";
+		return "redirect:/cliente?delete=sucess";
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/{id}")
