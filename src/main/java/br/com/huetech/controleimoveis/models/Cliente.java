@@ -26,6 +26,8 @@ public class Cliente {
 	private String cpf;
 	private String rg;
 	private Double renda;
+	
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	private Date dataCadastro;
 
 	// "cascade = CascadeType.ALL", reponsável por criar/atualizar/remover o
@@ -54,10 +56,16 @@ public class Cliente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	
 	public Date getDataAniversario() {
 		return this.dataAniversario;
-	}
+	} 
+	
+//	SOLUÇÃO ALTERNATIVA PARA FORMATAÇÃO DA DATA
+//	public String getDataAniversario(){
+//		DateUtil date = new DateUtil();
+//		return  date.getFormatDate(this.dataAniversario,"dd/MM/yyyy");
+//	}
 
 	public void setDataAniversario(Date dataAniversario) {
 		this.dataAniversario = dataAniversario;

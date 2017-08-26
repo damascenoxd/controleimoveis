@@ -164,11 +164,35 @@
 <!-- Mascaras para os inputs -->
 <script>
 	$(function() {
-		$("#dataAniversario").mask("00/00/0000");
-		$("#cpf").mask("000.000.000-00");
-		$("input[name='telefone.telefone']").mask("(00)00000-0000");
+		$("#dataAniversario").mask('ZZ/ZZ/ZZZZ',{
+		    translation: {
+		        'Z': {
+		          pattern: /[0-9]/, optional: false
+		        }
+		      }
+		    });
+		$("#cpf").mask("ZZZ.ZZZ.ZZZ-ZZ",{
+		    translation: {
+		        'Z': {
+		          pattern: /[0-9]/, optional: false
+		        }
+		      }
+		    });
+		$("input[name='telefone.telefone']").mask("(ZZ)ZZZZZ-ZZZ",{
+		    translation: {
+		        'Z': {
+		          pattern: /[0-9]/, optional: false
+		        }
+		      }
+		    });
+		$("input[name='endereco.cep']").mask("ZZZZZ-ZZZ",{
+		    translation: {
+		        'Z': {
+		          pattern: /[0-9]/, optional: false
+		        }
+		      }
+		    });
 // 		$("#renda").mask("#.##0,00", {reverse: true});
-		$("input[name='endereco.cep']").mask("00.000-000");
 	});
 </script>
 
