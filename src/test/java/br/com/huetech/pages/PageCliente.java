@@ -81,12 +81,12 @@ public class PageCliente extends PageObjectGeneric<PageCliente> {
 	
 	public void validaDadosInseridos(){
 		
+		int i = 0;
 		int 		 linha           = 0;
 		String       esperado        = "";
 		String       atual           = "";
 		boolean      isRegistro      = true;
-		List<String> dadosDaTela     = elementosFormulario();
-		List<String> dadosReferencia = new ArrayList<>();
+		List<String> dadosDaTela     = new ArrayList<>();
 		
 		// VERIFICA SE PLANILHA CONTÉM REGISTROS
 		try {
@@ -98,9 +98,18 @@ public class PageCliente extends PageObjectGeneric<PageCliente> {
 		Log.info("Capturando dados no repositorio...");
 		// VARRE A PLANILHA ENQUANTO HOUVER REGISTROS
 		while (isRegistro){
+			dadosDaTela = listagemDeClientesNaTela(linha+1);
 			for (int coluna = 0; coluna < dadosDaTela.size(); coluna++) {
 				try {
-					dadosReferencia.add(ExcelUtils.getDadosCelula(linha, coluna));
+					if ((coluna != 2) && (!(coluna >= 9 && coluna <= 14))){
+						esperado = ExcelUtils.getDadosCelula(linha, coluna);
+						atual    = dadosDaTela.get(i);
+						i++;
+						Log.info("Valor esperado (referencia)["+esperado+"], valor exibido ["+atual+"]");
+						if (!esperado.equals(atual)) {
+							Log.erro("E R R O -> Valores Divergentes");
+						}
+					}
 				} catch (Exception e) {
 					Log.erro("Valor esperado (referencia)["+esperado+"], valor exibido ["+atual+"]",e);
 				}
@@ -114,37 +123,15 @@ public class PageCliente extends PageObjectGeneric<PageCliente> {
 				e.printStackTrace();
 			} 
 		}
-//		while (isRegistro){
-//			for (int coluna = 0; coluna < dadosDaTela.size(); coluna++) {
-//				try {
-//					esperado = ExcelUtils.getDadosCelula(linha, coluna);
-//					atual    = dadosDaTela.get(coluna);
-//					Log.info("Valor esperado (referencia)["+esperado+"], valor exibido ["+atual+"]");
-//					Utils.assertEquals(esperado, atual);
-//					
-//				} catch (Exception e) {
-//					Log.erro("Valor esperado (referencia)["+esperado+"], valor exibido ["+atual+"]",e);
-//				}
-//			}
-//			linha++;
-//			
-//			// VERIFICA SE AINDA HÁ REGISTROS NA PLANILHA
-//			try {
-//				isRegistro = ExcelUtils.isProximaLinha(linha);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			} 
-//		}
 	}
-	
 	// GUARDA TODOS ELEMETOS DO FORMULÁRIO EM UMA LISTA
-	public List<String> elementosFormulario(){
+	public List<String> listagemDeClientesNaTela(int linha){
 		Log.info("Capturando dados exibidos na tela...");
 		List<String> dados = new ArrayList<>();
 		String       path  = "";
 		
 		for (int i = 1; i <= 8; i++) {
-			path               = "html/body/div[2]/div/div/table/tbody/tr/td["+i+"]";
+			path               = "html/body/div[2]/div/div/table/tbody/tr["+linha+"]/td["+i+"]";
 			WebElement element = Selenium.getDriver().findElement(By.xpath(path));
 			dados.add(element.getText());
 		}

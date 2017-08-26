@@ -105,9 +105,8 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 		
 		String[] caracteres = {"-","."," "};
 		String   rg         = Utils.removeCaracteres(RG.getAttribute("value") 		      , caracteres);
-		String   cpf        = Utils.removeCaracteres(CPF.getAttribute("value")		      , caracteres);
 		String   cep        = Utils.removeCaracteres(CEP.getAttribute("value")		      , caracteres);
-		String   celular    = Utils.removeCaracteres(telefoneCelular.getAttribute("value"), caracteres);
+		String   celular    = telefoneCelular.getAttribute("value").replace(" ", "");
 		
 		Log.info("Capturando dados...");
 		dados.add(0 , nome.getAttribute("value"));
@@ -116,10 +115,9 @@ public class PageGerarPessoas extends PageObjectGeneric<PageGerarPessoas> {
 		dados.add(3 , dataNacimento.getAttribute("value"));
 		dados.add(4 , Utils.getEstadoCivil());
 		dados.add(5 , Utils.getProfissao());
-		dados.add(6 , cpf);
+		dados.add(6 , CPF.getAttribute("value"));
 		dados.add(7 , rg);
-		dados.add(8 , renda+".00");
-		//dados.add(9 , Utils.getDataAtual());
+		dados.add(8 , renda+".0");
 		dados.add(9 , cep);
 		dados.add(10, endereco.getAttribute("value"));
 		dados.add(11, "Ligue pra mamãe");
