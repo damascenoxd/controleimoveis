@@ -69,7 +69,11 @@ public class ClienteController {
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView modelAndView = new ModelAndView("cliente/list");
+		
+		
 		modelAndView.addObject("findAll", clienteRepository.findAll());
+		
+		
 		return modelAndView;
 	}
 
