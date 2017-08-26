@@ -39,20 +39,21 @@ public class TestClienteIT extends BaseTestCase {
 		pageCliente.validaDadosInseridos();
 	}
 	
-	@Test
+	/*@Test
 	public void pesquisarClientesComSucesso() {
 		nomeTeste = "pesquisarClientesComSucesso";
 		Log.msgInicioTeste(nomeTeste);
 		pageCliente.listarClientes();
 		pageCliente.excluirClientes(20);
-	}
+	}*/
 	
 	@Test
 	public void excluirClientesComSucesso() {
 		nomeTeste = "excluirClientesComSucesso";
 		Log.msgInicioTeste(nomeTeste);
 		pageCliente.listarClientes();
-		pageCliente.excluirClientes(20);
+		pageCliente.excluirClientes(2);
+		// verificar exclusao
 	}
 	
 	@After

@@ -17,6 +17,7 @@ public abstract class Property {
 	public static final String URL;
 	public static final String ARQUIVO_TESTE_XLS;
 	public static final String PATH_ARQUIVO_TESTE;
+	public static final String PATH_EVIDENCIAS;
 	public static final String PLANILHA_CLIENTE;
 	public static final String TEMPO_ESPERA;
 	
@@ -31,6 +32,7 @@ public abstract class Property {
 		ARQUIVO_TESTE_XLS   = get("xls.teste");
 		PATH_ARQUIVO_TESTE  = get("path.xls");
 		PLANILHA_CLIENTE    = get("planilha.cliente");
+		PATH_EVIDENCIAS     = get("path.evidencias");
 		TEMPO_ESPERA        = get("tempo.espera");
 	}
 	

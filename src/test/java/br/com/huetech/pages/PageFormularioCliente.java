@@ -78,7 +78,7 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 	
 	public void preencherFormularioCliente(){
 
-		int 			 linha         = 19;
+		int 			 linha         = 0;
 		boolean          isRegistro    = true;
 		String     		 valorCelula   = null;
 		List<WebElement> elementos     = elementosFormulario();
@@ -110,7 +110,6 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
     			}
     		}
     		botaoSalvar.click();
-    		// verificar insercao
     		linha++;
     		
     		// VERIFICA SE AINDA HÁ REGISTROS NA PLANILHA

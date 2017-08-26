@@ -1,5 +1,7 @@
 package br.com.huetech.util;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
@@ -11,9 +13,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
+import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -203,16 +208,15 @@ public abstract class Utils {
 		return str;
 	}
 	
-//	public static void takeScreenshot(String fileName){
-//		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-//		Date data = new Date();
-//	    try {
-//			FileUtils.copyFile(scrFile, new File("C:\\Users\\Jarbas\\Desktop\\"+fileName+ data.getTime()+".jpeg"),true);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//	}
-//	
+	public static void takeScreenshot(String fileName){
+		File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		Date data = new Date();
+	    try {
+			FileUtils.copyFile(scrFile, new File("C:\\Users\\Jarbas\\Desktop\\"+fileName+ data.getTime()+".jpeg"),true);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 //	public static void calculaTempoDoTest(Date tempoInicio, Date tempoFinal) {
 //		long diferencaSegundos = (tempoFinal.getTime() - tempoInicio.getTime()) / (1000);
 //		long diferencaMinutos = (tempoFinal.getTime() - tempoInicio.getTime()) / (1000 * 60);

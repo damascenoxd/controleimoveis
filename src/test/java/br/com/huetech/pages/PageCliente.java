@@ -8,9 +8,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import br.com.huetech.common.Property;
 import br.com.huetech.common.Selenium;
 import br.com.huetech.util.ExcelUtils;
 import br.com.huetech.util.Log;
+import br.com.huetech.util.Utils;
 
 public class PageCliente extends PageObjectGeneric<PageCliente> {
 
@@ -81,10 +83,11 @@ public class PageCliente extends PageObjectGeneric<PageCliente> {
 	
 	public void validaDadosInseridos(){
 		
-		int i = 0;
+		int          i               = 0;
 		int 		 linha           = 0;
-		String       esperado        = "";
 		String       atual           = "";
+		String       esperado        = "";
+		boolean      passou          = true;      
 		boolean      isRegistro      = true;
 		List<String> dadosDaTela     = new ArrayList<>();
 		
@@ -107,7 +110,9 @@ public class PageCliente extends PageObjectGeneric<PageCliente> {
 						i++;
 						Log.info("Valor esperado (referencia)["+esperado+"], valor exibido ["+atual+"]");
 						if (!esperado.equals(atual)) {
+							passou = false;
 							Log.erro("E R R O -> Valores Divergentes");
+							Utils.takeScreenshot("["+atual+"] nao exibido");
 						}
 					}
 				} catch (Exception e) {
@@ -115,6 +120,7 @@ public class PageCliente extends PageObjectGeneric<PageCliente> {
 				}
 			}
 			linha++;
+			i=0;
 			
 			// VERIFICA SE AINDA HÁ REGISTROS NA PLANILHA
 			try {
@@ -123,6 +129,7 @@ public class PageCliente extends PageObjectGeneric<PageCliente> {
 				e.printStackTrace();
 			} 
 		}
+		Utils.assertTrue("E R R O -> verificar evidencias em: ["+Property.PATH_ARQUIVO_TESTE+"]", passou);
 	}
 	// GUARDA TODOS ELEMETOS DO FORMULÁRIO EM UMA LISTA
 	public List<String> listagemDeClientesNaTela(int linha){
