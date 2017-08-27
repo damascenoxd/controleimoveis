@@ -41,8 +41,7 @@
 
 
 			<!-- MENSAGEM DE SUCESSO -->
-			<div id="msg-session">
-				<div class="alert alert-success">
+				<div id="msg-session" class="alert ">
 					<div class="container-fluid">
 						<div class="alert-icon">
 							<i class="material-icons">check</i>
@@ -54,7 +53,6 @@
 						<b id="msg"></b>
 					</div>
 				</div>
-			</div>
 
 
 
@@ -227,13 +225,14 @@
 	$(document).ready(function() {
 		$('#msg-session').hide();
 
-		//o split separa a string quando encontra o ?
+		//o split separa a string quando encontra a string ""
 		var url = location.search.split("?");
 		var val = url[1].split("=");
 
 		if (val[1] == "sucess") {
 			$('#msg-session').show();
-
+			$("#msg-session").addClass("alert-success");
+				
 			if (val[0] == "save") {
 				$("#msg").html("Cliente cadastrado com sucesso!");
 			} //if (val[0] == "save")
@@ -241,7 +240,12 @@
 			else if (val[0] == "update") {
 				$("#msg").html("Cliente atualizado com sucesso!");
 			} //else if
-		} //if (val[1] == "sucess") 
+			
+			else if (val[0] == "delete") {
+				$("#msg").html("Cliente removido com sucesso!");
+			} //else if
+
+		} //if (val[1] == "sucess")
 	});
 </script>
 
