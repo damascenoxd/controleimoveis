@@ -10,6 +10,7 @@ import org.openqa.selenium.support.PageFactory;
 import br.com.huetech.common.Selenium;
 import br.com.huetech.util.ExcelUtils;
 import br.com.huetech.util.Log;
+import br.com.huetech.util.Utils;
 
 public class PageFormularioCliente extends PageObjectGeneric<PageFormularioCliente> {
 
@@ -72,6 +73,9 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 	
 	@FindBy(css = ".btn.btn-success")
 	WebElement botaoNovoCliente;
+	
+	@FindBy(xpath = ".//*[@id='msg-session']/div/b")
+	WebElement msgSucesso;
 	/*
 	 * =======================================
 	 */
@@ -110,6 +114,7 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
     			}
     		}
     		botaoSalvar.click();
+    		Utils.assertEquals("CLIENTE CADASTRADO COM SUCESSO!", msgSucesso.getText());
     		linha++;
     		
     		// VERIFICA SE AINDA HÁ REGISTROS NA PLANILHA

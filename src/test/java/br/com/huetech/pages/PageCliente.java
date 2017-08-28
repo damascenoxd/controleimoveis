@@ -83,13 +83,15 @@ public class PageCliente extends PageObjectGeneric<PageCliente> {
 	
 	public void validaDadosInseridos(){
 		
-		int          i               = 0;
 		int 		 linha           = 0;
-		String       atual           = "";
-		String       esperado        = "";
+		int 		 cAtual          = 0;
+		int 		 posicao         = 0;
 		boolean      passou          = true;      
+		boolean      achouDado       = false;
 		boolean      isRegistro      = true;
-		List<String> dadosDaTela     = new ArrayList<>();
+		String       dadoTela        = "";
+		String       dadoCelula      = "";
+		List<String> dadosTela       = new ArrayList<>();
 		
 		// VERIFICA SE PLANILHA CONTÉM REGISTROS
 		try {
@@ -98,29 +100,43 @@ public class PageCliente extends PageObjectGeneric<PageCliente> {
 			e.printStackTrace();
 		}
 		
-		Log.info("Capturando dados no repositorio...");
 		// VARRE A PLANILHA ENQUANTO HOUVER REGISTROS
 		while (isRegistro){
-			dadosDaTela = listagemDeClientesNaTela(linha+1);
-			for (int coluna = 0; coluna < dadosDaTela.size(); coluna++) {
+			for (int coluna = 0; coluna <= 8; coluna++) {
+				Log.info("Capturando listagem exibida na tela...");
 				try {
-					if ((coluna != 2) && (!(coluna >= 9 && coluna <= 14))){
-						esperado = ExcelUtils.getDadosCelula(linha, coluna);
-						atual    = dadosDaTela.get(i);
-						i++;
-						Log.info("Valor esperado (referencia)["+esperado+"], valor exibido ["+atual+"]");
-						if (!esperado.equals(atual)) {
-							passou = false;
-							Log.erro("E R R O -> Valores Divergentes");
-							Utils.takeScreenshot("["+atual+"] nao exibido");
+					dadosTela  = listaDadosDeClientesNaTela(cAtual+1);
+					dadoCelula = ExcelUtils.getDadosCelula(linha, coluna);
+
+					/* VERIFICA SE EXITE ALGUM DADO NA COLUNA DA LISTAGEM DA TELA, 
+					   IGUAL AO DA CELULA */
+					if (coluna != 2){
+						cAtual++;
+						if (coluna == 0) {
+							for (int i = 0; i < dadosTela.size(); i++) {
+								if (dadoCelula.equals(dadosTela.get(i))){
+									posicao = i;
+									i = dadosTela.size();
+									Log.info("Valor da celula ["+dadoCelula+"], encontrado na aplicacao");
+									achouDado = true;
+								}
+							}
+						}else{
+							Log.info("Valor esperado (referencia)["+dadoCelula+"], valor exibido ["+dadoTela+"]");
+							Utils.assertEquals(dadoCelula, dadosTela.get(posicao));
+							achouDado = true;
 						}
 					}
+					if (!achouDado){
+						passou    = false;
+						Log.info("Valor esperado ["+dadoCelula+"], nao encontrado na listagem");
+					}
 				} catch (Exception e) {
-					Log.erro("Valor esperado (referencia)["+esperado+"], valor exibido ["+atual+"]",e);
+					Log.erro("Valor esperado (referencia)["+dadoCelula+"], valor exibido ["+dadoTela+"]",e);
 				}
 			}
 			linha++;
-			i=0;
+			cAtual=0;
 			
 			// VERIFICA SE AINDA HÁ REGISTROS NA PLANILHA
 			try {
@@ -131,16 +147,19 @@ public class PageCliente extends PageObjectGeneric<PageCliente> {
 		}
 		Utils.assertTrue("E R R O -> verificar evidencias em: ["+Property.PATH_ARQUIVO_TESTE+"]", passou);
 	}
-	// GUARDA TODOS ELEMETOS DO FORMULÁRIO EM UMA LISTA
-	public List<String> listagemDeClientesNaTela(int linha){
-		Log.info("Capturando dados exibidos na tela...");
-		List<String> dados = new ArrayList<>();
-		String       path  = "";
+
+	//	 GUARDA TODOS ELEMETOS DO FORMULÁRIO EM UMA LISTA
+	public List<String> listaDadosDeClientesNaTela(int coluna){
 		
-		for (int i = 1; i <= 8; i++) {
-			path               = "html/body/div[2]/div/div/table/tbody/tr["+linha+"]/td["+i+"]";
-			WebElement element = Selenium.getDriver().findElement(By.xpath(path));
-			dados.add(element.getText());
+		int linha = 1;
+		List<String> dados = new ArrayList<>();
+		By colunaDaTela = By.xpath("html/body/div[2]/div/div/table/tbody/tr["+linha+"]/td["+coluna+"]");
+		
+		while (isVisibility(colunaDaTela)) {
+			WebElement textoColuna = Selenium.getDriver().findElement(colunaDaTela);
+			dados.add(textoColuna.getText());
+			linha++;
+			colunaDaTela = By.xpath("html/body/div[2]/div/div/table/tbody/tr["+linha+"]/td["+coluna+"]");
 		}
 		return dados;
 	}
