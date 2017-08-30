@@ -76,6 +76,9 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 	
 	@FindBy(xpath = ".//*[@id='msg-session']/div/b")
 	WebElement msgSucesso;
+	
+	@FindBy(xpath = "html/body/div[2]/div/div/div/h2")
+	WebElement tituloAtualizarCliente;
 	/*
 	 * =======================================
 	 */
@@ -150,5 +153,22 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 		elementos.add(campoComplemento);
 		elementos.add(comboBairro);
 		return elementos;
+	}
+	
+	public String alterarNomeCliente(String cliente) {
+		aguardarElementoVisivel(tituloAtualizarCliente);
+		cliente = cliente+" TESTE EDICAO";
+		preencherCampo(campoNomeCliente, cliente);
+		botaoSalvar.click();
+		aguardarElementoVisivel(msgSucesso);
+		Utils.assertEquals("CLIENTE ATUALIZADO COM SUCESSO!", msgSucesso.getText());
+		return cliente;
+	}
+	
+	public void testeExcecao(){
+		aguardarElementoVisivel(tituloAtualizarCliente);
+		if (!tituloAtualizarCliente.getText().equals("Atualizar Cliente")) {
+			throw new RuntimeException();
+		}
 	}
 }

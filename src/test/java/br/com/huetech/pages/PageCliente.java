@@ -28,9 +28,21 @@ public class PageCliente extends PageObjectGeneric<PageCliente> {
 	
 	@FindBy(xpath = ".//*[@id='menu']/ul/li/ul/li[2]/a")
 	WebElement listCliente;
-	
+				     
 	@FindBy(xpath = "html/body/div[2]/div/div/div/h2")
 	WebElement tituloCliente;
+	
+	@FindBy(xpath = "html/body/div[2]/div/div/table/tbody/tr[1]/td[9]/a[contains(.,'Excluir')]")
+	WebElement excluirCliente1;
+	
+	@FindBy(xpath = "html/body/div[2]/div/div/table/tbody/tr[1]/td[9]/a[contains(.,'Editar')]")
+	WebElement editarCliente1;
+	
+	@FindBy(xpath = "html/body/div[2]/div/div/table/tbody/tr[1]/td[1]")
+	WebElement nomeCliente1;
+	
+	@FindBy(xpath = ".//*[@id='msg-session']/div/b")
+	WebElement msgExclusaoSucesso;
 	
 	public void adicionarNovoCliente(){
 		aguardarElementoVisivel(menu);
@@ -48,15 +60,55 @@ public class PageCliente extends PageObjectGeneric<PageCliente> {
 		Log.info("Direcionando para página listagem de cliente...");
 	}
 	
+	public String atualizarCliente(){
+		aguardarElementoVisivel(tituloCliente);
+		String nomeCliente = nomeCliente1.getText();
+		Log.info("Editando cliente ["+nomeCliente+"]...");
+		editarCliente1.click();
+		return nomeCliente;
+	}
+	
+	public String excluirCliente(){
+		aguardarElementoVisivel(tituloCliente);
+		String nomeCliente = nomeCliente1.getText();
+		Log.info("Excluindo cliente ["+nomeCliente+"]...");
+		excluirCliente1.click();
+		aguardarElementoVisivel(msgExclusaoSucesso);
+		Utils.assertEquals("CLIENTE REMOVIDO COM SUCESSO!", msgExclusaoSucesso.getText());
+		return nomeCliente;
+	}
+	
+	public boolean validaExclusaoCliente(String cliente){
+		List<String> nomesClientesNaTela = listaDadosDeClientesNaTela(1);
+		
+		for (int i = 0; i < nomesClientesNaTela.size(); i++) {
+			if (cliente.equals(nomesClientesNaTela.get(i))) {
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean validaAtualizacaoCliente(String cliente){
+		List<String> nomesClientesNaTela = listaDadosDeClientesNaTela(1);
+		
+		for (int i = 0; i < nomesClientesNaTela.size(); i++) {
+			if (cliente.equals(nomesClientesNaTela.get(i))) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public void excluirClientes(int qtdClientes){
-		String path = "";
+		String dadoCliente = "";
 		List<String> clientes = selecionarClientes(qtdClientes);
 		aguardarElementoVisivel(tituloCliente);
 		
 		for (int i = 0; i < clientes.size(); i++) {
-			path = "html/body/div[2]/div/div/table/tbody/tr/td[contains(.,'"+clientes.get(i)+"')]//..//td/a[contains(.,'Excluir')]";
+			dadoCliente = "html/body/div[2]/div/div/table/tbody/tr/td[contains(.,'"+clientes.get(i)+"')]//..//td/a[contains(.,'Excluir')]";
 			try {
-				WebElement excluirCliente = Selenium.getDriver().findElement(By.xpath(path));
+				WebElement excluirCliente = Selenium.getDriver().findElement(By.xpath(dadoCliente));
 				excluirCliente.click();
 			} catch (Exception e) {
 				Log.erro("Não foi possível encontrar o dado: ["+clientes.get(i)+"] na listagem de clientes");
@@ -81,7 +133,7 @@ public class PageCliente extends PageObjectGeneric<PageCliente> {
 		return clientes;
 	}
 	
-	public void validaDadosInseridos(){
+	public void validaDadosMassa_X_Aplicacao(){
 		
 		int 		 linha           = 0;
 		int 		 cAtual          = 0;
