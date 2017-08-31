@@ -36,6 +36,14 @@ public class TestClienteIT extends BaseTestCase {
 	 * 
 	 * ===============================================================
 	 */
+	
+	/*
+	 * O TESTE ABAIXO TAMBÉM SERVE PARA TESTE DE PERFORMANCE.
+	 * A DIFERENÇA ESTÁ NA PROPRIEDADE ESCOLHIDA
+	 * "xls.teste=Pasta1.xls" -> PARA POUCOS REGISTROS
+	 * "xls.teste=carga.xls"  -> COM MAIS DE 100 REGISTROS 
+	 * 
+	 */
 	@Test
 	public void adicionarClientesComSucesso() {
 		nomeTeste = "adicionarClientesComSucesso";
@@ -79,18 +87,29 @@ public class TestClienteIT extends BaseTestCase {
 	
 	
 	/*
-	 * TESTES DE NEGACAO
+	 * TESTES DE EXCECAO
 	 * 
 	 * ===============================================================
 	 */
 	@Test(expected=RuntimeException.class)
-	public void A() {
+	public void verificaExcecaoTituloAtualizarCliente() {
 		nomeTeste = "adicionarClientesComSucesso";
 		Log.msgInicioTeste(nomeTeste);
 		pageCliente.listarClientes();
-		String dadoAnterior = pageCliente.atualizarCliente();
-		pageFormularioCliente.testeExcecao();
+		pageCliente.atualizarCliente();
+		pageFormularioCliente.excecaoTituloAtualizarCliente();
 	}
+	
+	@Test(expected=RuntimeException.class)
+	public void verificaMsgExclusaoCliente() {
+		nomeTeste = "adicionarClientesComSucesso";
+		Log.msgInicioTeste(nomeTeste);
+		pageCliente.listarClientes();
+		pageFormularioCliente.excecaoTituloAtualizarCliente();
+	}
+	/*
+	 * ===============================================================
+	 */
 	
 	@After
 	public void fechaArquivoExcel(){

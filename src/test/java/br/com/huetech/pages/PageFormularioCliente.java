@@ -85,6 +85,7 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 	
 	public void preencherFormularioCliente(){
 
+		int              cont          = 1;
 		int 			 linha         = 0;
 		boolean          isRegistro    = true;
 		String     		 valorCelula   = null;
@@ -113,10 +114,12 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 					}else
 						preencherCampo(elementos.get(coluna), valorCelula);
     			} catch (Exception e) {
+    				Log.erro("Quantidade de registros inseridos ["+cont+"]");
     				Log.erro("Erro no preenchimento do valor ["+valorCelula+"], do elemento["+elementos.get(coluna)+"]", e);
     			}
     		}
     		botaoSalvar.click();
+    		//TESTE DE FEEDBACK
     		Utils.assertEquals("CLIENTE CADASTRADO COM SUCESSO!", msgSucesso.getText());
     		linha++;
     		
@@ -128,6 +131,7 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 					aguardarElementoVisivel(elementos.get(elementos.size()-1));
 				}
 			} catch (Exception e) {
+				Log.erro("Quantidade de registros inseridos ["+cont+"]");
 				e.printStackTrace();
 			} 
     	}
@@ -161,11 +165,12 @@ public class PageFormularioCliente extends PageObjectGeneric<PageFormularioClien
 		preencherCampo(campoNomeCliente, cliente);
 		botaoSalvar.click();
 		aguardarElementoVisivel(msgSucesso);
+		//TESTE DE FEEDBACK
 		Utils.assertEquals("CLIENTE ATUALIZADO COM SUCESSO!", msgSucesso.getText());
 		return cliente;
 	}
 	
-	public void testeExcecao(){
+	public void excecaoTituloAtualizarCliente(){
 		aguardarElementoVisivel(tituloAtualizarCliente);
 		if (!tituloAtualizarCliente.getText().equals("Atualizar Cliente")) {
 			throw new RuntimeException();

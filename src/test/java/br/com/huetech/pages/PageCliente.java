@@ -215,4 +215,10 @@ public class PageCliente extends PageObjectGeneric<PageCliente> {
 		}
 		return dados;
 	}
+	
+	public void excecaoMsgExclusaoCliente(){
+		if (!msgExclusaoSucesso.getText().equals("CLIENTE REMOVIDO COM SUCESSO!")) {
+			throw new RuntimeException();
+		}
+	}
 }

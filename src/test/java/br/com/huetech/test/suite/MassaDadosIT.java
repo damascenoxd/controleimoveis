@@ -15,7 +15,7 @@ public class MassaDadosIT extends BaseTestCase{
 
 	private String           nomeTeste             = null;
 	PageGerarPessoas         pageGeraPessoas       = new PageGerarPessoas();
-	private final static int NUMERO_DE_REGISTROS   = 2;
+	private final static int NUMERO_DE_REGISTROS   = 20;
 	
 	@Before
 	public void lerArquivoXLS() throws Exception{
